@@ -1,0 +1,37 @@
+.example-card {
+    max-width: 400px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 2px 2px 7px 6px rgba(97,49,55,0.69);
+}
+
+.container {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    width: 450px;
+    
+}
+
+
+.mat-card-header {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center; 
+    color: darkblue;
+    font-size: x-large;
+    padding-top: 3%;
+    background-color: lightblue;
+}
+
+.mat-card-content {
+    padding-top: 3%;
+}
+
+.mat-divider {
+    padding-bottom: 2%;
+}

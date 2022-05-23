@@ -1,0 +1,198 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <mat-card class="card">
+            <mat-card-header>
+                <mat-card-title><b>Registrar Cuenta</b></mat-card-title>
+                <mat-card-subtitle><mat-icon class="icono">person_add</mat-icon>
+                </mat-card-subtitle>
+            </mat-card-header>
+            
+            <mat-divider inset></mat-divider>
+            <mat-card-content>
+            <div class="row justify-content-center">
+             <form 
+              *ngIf = "!esExitoso"
+               name="form"
+               (ngSubmit)="f.form.valid && registrar()"
+               #f="ngForm"
+               novalidate 
+             >
+                 <div class="row">
+                 <div class="col-sm-6">
+                     <div class="form-group">
+                         <mat-icon>person</mat-icon>
+                         <mat-form-field appearance="fill" class="textoDT" > 
+                             <mat-label>Ingrese su nombre</mat-label>
+                             <input matInput placeholder="Nombre usuario" 
+                             type="text"
+                             class="form-control"
+                             name="nombreusuario"
+                             [(ngModel)]="form.nombreusuario"
+                             required
+                             minlength="3"
+                             maxlength="25"
+                             #nombreusuario="ngModel"
+                             >
+                          
+                           </mat-form-field>
+                         
+                     </div>
+                 </div>
+                 <div class="col-sm-6">
+                     <div class="form-group">
+                         
+                         <mat-form-field appearance="fill" class="texto">
+                             <mat-label>Ingrese su apellido</mat-label>
+                             <input matInput placeholder="Apellido"  
+                             type="text"
+                             class="form-control"
+                             name="apellidousuario"
+                             [(ngModel)]="form.apellidousuario"
+                             required
+                             minlength="4"
+                             maxlength="25"
+                             #apellidousuario="ngModel"
+                             >
+                         </mat-form-field>
+                        </div>
+                 </div>
+                 </div>
+                 
+                 <div class="row">
+                     <div class="col-sm-6">
+                         <div class="form-group">
+                             <mat-icon>home</mat-icon>
+                             <mat-form-field appearance="fill" class="textoDT" > 
+                                 <mat-label>Ingrese su dirección</mat-label>
+                                 <input matInput placeholder="Dirección usuario" 
+                                 type="text"
+                                 class="form-control"
+                                 name="direccion"
+                                 [(ngModel)]="form.direccion"
+                                 required
+                                 minlength="3"
+                                 maxlength="50"
+                                 #direccion="ngModel"
+                                 >
+                             
+                             </mat-form-field>
+                             
+                 </div>
+                     
+                     </div>
+                     <div class="col-sm-6">
+                         <div class="form-group">
+                         <mat-icon> phone</mat-icon>
+                         <mat-form-field appearance="fill" class="textoDT" > 
+                             <mat-label>Ingrese su telefono</mat-label>
+                             <input matInput placeholder="Telefono usuario" 
+                             type="number"
+                             class="form-control"
+                             name="telefono"
+                             [(ngModel)]="form.telefono"
+                             required
+                             minlength="10"
+                             maxlength="10"
+                             #telefono="ngModel"
+                             >
+                         
+                         </mat-form-field>
+                         
+                         </div>
+                     </div>
+                 </div>  
+                 
+                 <div class="form-group">
+                    <mat-icon>calendar_today</mat-icon>
+                    <mat-form-field appearance="fill" class="texto" >
+                        <mat-label>Seleccione su fecha de nacimiento</mat-label>
+                        <input matInput [matDatepicker]="picker" 
+                          class="form-control"
+                          name="fechanacimiento"
+                          [(ngModel)]="form.fechanacimiento"
+                          required
+                          #fechanacimiento="ngModel"
+                          >
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker ></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                    <mat-icon>face</mat-icon>
+                    <mat-label>  Género: </mat-label>
+                    <mat-radio-group 
+                    class="form-control"
+                    name="genero"
+                    [(ngModel)]="form.genero"
+                    required
+                    #genero="ngModel"
+                    >
+                   <mat-radio-button *ngFor="let op of generos" name="genero" [value]="op" class="buttonGenero">
+                    {{op}}
+                   </mat-radio-button>
+                   </mat-radio-group>
+                 
+    
+                 </div>
+                
+                 <div class="form-group">
+                            <mat-icon> email</mat-icon>
+                            <mat-form-field appearance="fill" class="texto">
+                                <mat-label>Ingrese su email</mat-label>
+                                <input matInput placeholder="pat@example.com"  
+                                 type="email"
+                                 class="form-control"
+                                 name="email"
+                                 [(ngModel)]="form.email"
+                                 required
+                                 email
+                                 #email="ngModel"
+                                >
+                            </mat-form-field>
+                 </div>
+
+                 <div class="form-group">
+                            <mat-icon> vpn_key</mat-icon>
+                            <mat-form-field appearance="fill" class="texto">
+                                <mat-label>Ingrese su clave</mat-label>
+                                <input  matInput placeholder="Clave"  
+                                  type="password"
+                                  class="form-control"
+                                  name="clave"
+                                  [(ngModel)]="form.clave"
+                                  required
+                                  maxlength="5"
+                                  minlength="5"
+                                  #clave="ngModel"
+                                  >
+                            </mat-form-field>
+                 </div>
+                   
+                 
+                     <button mat-raised-button color="primary">Crear cuenta</button>
+                 
+                 
+                 <div class="alert alert-warning" *ngIf="f.submitted && esRegistroFallido ">
+                     Registro fallido <br> {{mensaje}}
+                 </div>
+              </form>
+              <div class="alert alert-success" *ngIf="esExitoso">
+                  Usuario registrado exitosamente
+              </div>
+            </div>
+              </mat-card-content>
+          <mat-divider inset></mat-divider>
+          <mat-card-actions>
+             Ya tienes una cuenta creada <button mat-stroked-button color="primary" (click)="irAIniciarSesion()" >Inicia sesión</button> 
+         </mat-card-actions>
+     
+         </mat-card>
+    </div>
+    
+</div>
+  
+
+
+

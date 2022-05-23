@@ -1,0 +1,31 @@
+<div class="header">
+  
+  <div class="izquierda">
+      <img src="../assets/img/logo.png" class="logo">
+    <button mat-button class="menuH" *ngIf="usuarioActual.rolusuario === 'admin'" routerLink="/equipo">Crear Equipo</button>
+    <button mat-button class="menuH" *ngIf="usuarioActual.rolusuario === 'admin'" routerLink="/directivo">Crear Usuario</button>
+         
+ </div>
+
+  <div class="derecha">
+    
+      <button class="btnMenu"  mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon  class="icono">account_box</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="abrirInformacionUsuario()">
+            <mat-icon>assignment_ind</mat-icon>
+            <span>Mi cuenta</span>
+          </button>
+          <button mat-menu-item >
+              <mat-icon> message</mat-icon>
+            <span>Mensajes</span>
+          </button>
+          <button mat-menu-item (click)="cerrarsesion()">
+              <mat-icon>exit_to_app</mat-icon>
+            <span>Cerrar sesión</span>
+          </button>
+        </mat-menu>
+  </div>
+
+</div>

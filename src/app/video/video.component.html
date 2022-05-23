@@ -1,0 +1,28 @@
+
+<div class="container">
+    <div class="row">
+        <form>
+           <div class="form-group">
+            <mat-label>Subir video</mat-label>
+            <input type="file" class="file-input"
+            requiredFileType="image/png"
+            required
+           (change)="onFileSelected($event)" #fileUpload>  
+        </div>
+        <div class="file-upload">
+
+            {{fileName || "No file uploaded yet."}}
+         
+             <button mat-mini-fab color="primary" class="upload-btn"
+               (click)="fileUpload.click()">
+                 <mat-icon>attach_file</mat-icon>
+         
+             </button>
+         
+         </div>
+         
+                
+              
+        </form>
+    </div>
+</div>

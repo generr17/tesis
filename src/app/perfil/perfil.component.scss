@@ -1,0 +1,38 @@
+.container {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    width: 600px;
+    
+}
+
+.card {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 2px 2px 7px 6px rgba(97,49,55,0.69);
+  
+}
+
+.textoDT {
+  width: 70%;
+}
+.titulo {
+  color: darkblue;
+  font-size: x-large;
+  padding-top: 3%;
+  background-color: lightblue;
+  
+}
+
+.row {
+  padding-top: 3%;
+ padding-bottom: 3%;
+}
+.icono {
+  font-size: 45px;
+  justify-content: center;
+  color: darkblue;
+}
+

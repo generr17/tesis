@@ -1,0 +1,66 @@
+
+<div class="container " >
+    <div class="row justify-content-center" >
+     <div class="col-sm-6" id="equipos" >
+      <div class="titulo"><b>Equipos</b></div> 
+     <div class="row"  >
+       <div class="col-sm-6">
+        <div id="subtitulo"> <b> SERIE A</b></div>
+          <div class="row pt-2" *ngFor="let equipo of equipos">
+            <div class="col" >
+              <mat-card *ngIf="equipo.serie ===1">
+                <mat-card-title>{{equipo.nombre}}</mat-card-title>
+                <mat-card-subtitle>{{equipo.telefono}}</mat-card-subtitle>
+                <mat-card-content>
+                  {{equipo.direccion}}
+                  {{equipo.serie}}
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button>LIKE</button>
+                  <button mat-button>SHARE</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          </div>
+       </div>
+      
+       <div class="col-sm-6" >
+        <div id="subtitulo"> <b> SERIE B</b></div>
+        <div class="row pt-2" *ngFor="let equipo of equipos">
+          <div class="col">
+            <mat-card *ngIf="equipo.serie ===2">
+              <mat-card-title>{{equipo.nombre}}</mat-card-title>
+              <mat-card-subtitle>{{equipo.telefono}}</mat-card-subtitle>
+              <mat-card-content>
+                {{equipo.direccion}}
+      
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>LIKE</button>
+                <button mat-button>SHARE</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+     </div>
+      
+     </div>
+     </div> 
+     <div class="col-sm-6">
+     
+      <div class="row">
+       
+        <div class="col">
+          <input type="file" >
+        </div>
+
+      </div>
+
+         
+     
+     </div> 
+    </div>
+</div>
+
+
+

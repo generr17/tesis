@@ -1,0 +1,72 @@
+<div class="container">
+    <mat-card class="card">
+       <div class="titulo">
+        <h1><b>Nueva convocatoria</b></h1>
+        <mat-icon class="icono">note_add</mat-icon>
+       </div>
+       
+       <mat-divider inset></mat-divider>
+       <div class="row justify-content-center">
+        <form >
+           <div>
+            <h2><b>Eslogan</b></h2>
+            <mat-form-field>
+                <mat-label><b>Descripción</b></mat-label>
+                <input matInput placeholder="Name"  required>
+            </mat-form-field>
+           </div>
+            <div >
+                <h2><b>Requisitos</b></h2>
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field appearance="fill" class="texto" > 
+                            <mat-label>Puesto o posición de juego</mat-label>
+                            <input matInput placeholder="Name"  required>
+                            
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field appearance="fill" class="texto">
+                            <mat-label>Edad requerida</mat-label>
+                            <input  type="number" matInput placeholder="Apellido"  required>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field appearance="fill" class="texto">
+                            <mat-label>Fecha de inicio y cierre</mat-label>
+                            <mat-date-range-input [rangePicker]="picker">
+                              <input matStartDate placeholder="Start date">
+                              <input matEndDate placeholder="End date">
+                            </mat-date-range-input>
+                            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                          </mat-form-field>
+                    </div>
+                
+                    <div class="col">
+                     
+    
+                        <mat-form-field appearance="fill" class="texto">
+                            <mat-label>Género</mat-label>
+                            <input type="text" matInput placeholder="pat@example.com"  required>
+                        </mat-form-field>
+                    </div>
+             
+                </div>
+              
+        </div>
+            
+            <mat-divider inset></mat-divider>
+            
+            <button mat-raised-button color="primary">Crear convocatoria</button>
+        </form>
+       </div>
+    
+    
+    </mat-card>
+</div>
+  
+

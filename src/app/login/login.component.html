@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="row justify-content-center">
+    
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title><b>Iniciar Sesión</b></mat-card-title>
+          <mat-card-subtitle><mat-icon class="icono">account_circle</mat-icon>
+          </mat-card-subtitle>
+      </mat-card-header>
+    
+       <mat-card-content class="contentCard">
+         
+          <form class="formI"
+            *ngIf="!estaLogeado"
+            name="form"
+            (ngSubmit)="f.form.valid && iniciarSesion()"
+            #f="ngForm"
+            novalidate
+          >
+          <div class="form-group">
+            <mat-icon>person</mat-icon>
+            <mat-form-field class="texto" appearance="fill" >
+              <mat-label>Usuario</mat-label>
+              <input matInput placeholder="Correo"
+               type="email"
+               class="form-control"
+               name="email"
+               [(ngModel)]="form.email"
+               required
+               #email="ngModel"
+              >
+              <div class="alert alert-danger"
+              role="alert"
+              *ngIf="f.submitted && email.invalid"
+              >
+                El correo es requerido
+              </div>
+            </mat-form-field>
+          </div>
+          
+          <div class="form-group">
+            <mat-icon> vpn_key</mat-icon>
+            <mat-form-field class="texto" appearance="fill">
+              <mat-label>Contraseña</mat-label>
+              <input matInput placeholder="Clave"
+                type="password"
+                class="form-control"
+                name="clave"
+                [(ngModel)]="form.clave"
+                required
+                #clave="ngModel"
+              >
+  
+              <div class="alert alert-danger"
+              role="alert"
+              *ngIf="f.submitted && clave.invalid"
+              >
+               El correo es requerido
+              </div>
+            </mat-form-field>
+          </div>        
+           <div class="form group">
+            <button mat-flat-button color="primary">Ingresar</button>
+           </div>
+  
+           <div class="form-group">
+             <div
+             class="alert alert-danger"
+             role="alert"
+             *ngIf="f.submitted && estaLogeado"
+             >
+               Login Fallido: {{ mensaje }}
+  
+             </div>
+           </div>
+        </form>
+        <div class="alert alert-success" *ngIf="estaLogeado">
+           Logeado como {{rol}}
+        </div>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions>
+          No tienes una cuenta<button mat-stroked-button color="primary" (click)="irARegistrar()">Registrate</button>
+        </mat-card-actions>
+      </mat-card>
+   
+    
+      
+  </div>
+</div>
+
+
+

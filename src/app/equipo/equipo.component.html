@@ -1,0 +1,112 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <mat-card class="example-card ">
+            <mat-card-header>
+                    <mat-card-title><b>Equipo de Futbol</b></mat-card-title>
+            </mat-card-header>
+            
+            <mat-card-content>
+              <mat-divider inset></mat-divider>
+            <form
+                name="form"
+                *ngIf="!esExitoso"
+                (ngSubmit)="f.form.valid && guardarEquipo()"
+                #f="ngForm"
+                novalidate
+                >
+                <div class="form-group">
+                    <mat-icon>location_city</mat-icon>
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Nombre</mat-label>
+                      <input matInput placeholder="Nombre del equipo"
+                       type="text"
+                       class="form-control"
+                       name="nombre"
+                       [(ngModel)]="form.nombre"
+                       required
+                       maxlength="20"
+                       #nombre="ngModel"
+                      >
+                      <div class="alert alert-danger"
+                      role="alert"
+                      *ngIf="f.submitted && nombre.invalid"
+                      >
+                        El nombre de equipo es requerido
+                      </div>
+                    </mat-form-field>
+                  </div>
+                  <div class="form-group">
+                    <mat-icon>map</mat-icon>
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Direccion</mat-label>
+                      <input matInput placeholder="Nombre del equipo"
+                       type="text"
+                       class="form-control"
+                       name="direccion"
+                       [(ngModel)]="form.direccion"
+                       required
+                       maxlength="20"
+                       #direccion="ngModel"
+                      >
+                      <div class="alert alert-danger"
+                      role="alert"
+                      *ngIf="f.submitted && direccion.invalid"
+                      >
+                        La dirección del equipo es requerido
+                      </div>
+                    </mat-form-field>
+                  </div>
+                  <div class="form-group">
+                    <mat-icon>contact_phone</mat-icon>
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Telefono</mat-label>
+                      <input matInput placeholder="Telefono del equipo"
+                       type="text"
+                       class="form-control"
+                       name="telefono"
+                       [(ngModel)]="form.telefono"
+                       required
+                       maxlength="10"
+                       #telefono="ngModel"
+                      >
+                      <div class="alert alert-danger"
+                      role="alert"
+                      *ngIf="f.submitted && telefono.invalid"
+                      >
+                        El telefono del equipo es requerido
+                      </div>
+                    </mat-form-field>
+                  </div>
+                  <div class="form-group">
+                      <mat-icon>class</mat-icon>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Serie</mat-label>
+                        <mat-select 
+                        class="form-control"
+                        name="serieId"
+                        [(ngModel)]="form.serieId"
+                        required
+                        #serieId="ngModel"
+                        >
+                          <mat-option>--</mat-option>
+                          <mat-option *ngFor="let clase of clases" [value]="clase">
+                           {{clase}}
+                          </mat-option>
+                        </mat-select>
+                        <div class="alert alert-danger"
+                        role="alert"
+                        *ngIf="f.submitted && serieId.invalid"
+                        >
+                          El tipo de equipo es requerido
+                        </div>
+                        </mat-form-field>
+                  </div>
+                  <div class="form group">
+                    <button mat-flat-button color="primary">Guardad Equipo</button>
+                   </div>
+
+            </form>
+            </mat-card-content>
+          </mat-card>
+    </div>
+</div>

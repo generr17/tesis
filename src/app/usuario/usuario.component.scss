@@ -1,0 +1,50 @@
+.container {
+    padding: 2%;
+}
+
+
+.titulo {
+    align-content: center;
+    text-align: center;
+}
+
+
+#equipos{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: -1px 2px 14px 9px rgba(36,7,14,0.4);
+    background-color: steelblue;
+    border-radius: 10px;
+    padding: 2%;
+  
+}
+
+.mat-card {
+    border-radius: 5px;  
+    background-color: cadetblue;
+    
+}
+
+
+.titulo {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: xx-large;
+    color: bisque;
+    font-style: oblique;
+    padding-bottom: 20px
+}
+
+#subtitulo {
+     
+    font-size: large;
+    color: bisque;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.file {
+    align-items: center;
+    align-content: center;
+    padding: 2%;
+    
+}

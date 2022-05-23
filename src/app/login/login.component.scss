@@ -1,0 +1,59 @@
+
+  .container {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    width: 350px;
+    
+}
+
+.row {
+  padding-top: 3%;
+ padding-bottom: 3%;
+}
+.card {
+  align-items: center;
+  justify-content: center;
+  text-align: center; 
+  box-shadow: 2px 2px 7px 6px rgba(97,49,55,0.69);
+}
+
+.formI {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    padding-top: 5%;
+  
+  }
+  .example-card {
+    max-width: 400px;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+  }
+  
+  .icono {
+      font-size: 45px;
+      color: darkblue;
+  }
+
+
+  .mat-card-header {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center; 
+    color: darkblue;
+    font-size: x-large;
+    padding-top: 3%;
+    background-color: lightblue;
+}
+
+.texto {
+  width: 80%;
+}
+
+
+  

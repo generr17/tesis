@@ -1,0 +1,196 @@
+<mat-dialog-content class="mat-typography">
+<div class="container" *ngIf="usuarioActual; else loggedOut">
+    <mat-card class="card">
+       <div class="titulo">
+        <h1><b>Perfil Usuario</b></h1>
+        <mat-icon class="icono">person_outline</mat-icon>
+       </div>
+       
+       <mat-divider inset></mat-divider>
+       <mat-divider inset></mat-divider>
+       <div class="row justify-content-center">
+        <form 
+         *ngIf = "!esExitoso"
+          name="form"
+          (ngSubmit)="f.form.valid && editar()"
+          #f="ngForm"
+          novalidate 
+        >
+            <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                   
+                    <mat-icon>person</mat-icon>
+                    <mat-form-field appearance="fill" class="textoDT" > 
+                        <mat-label>Nombre</mat-label>
+                        <input matInput disabled="false"
+                        type="text"
+                        class="form-control"
+                        name="nombreusuario"
+                        [(ngModel)]="form.nombreusuario"
+                        required
+                        maxlength="25"
+                        #nombreusuario="ngModel"
+                        >  
+                    </mat-form-field>
+                     
+                  </div>
+                 
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <mat-icon>person</mat-icon>
+                    <mat-form-field appearance="fill" class="textoDT" > 
+                        <mat-label>Apellido</mat-label>
+                        <input matInput disabled="false"
+                        type="text"
+                        class="form-control"
+                        name="apellidousuario"
+                        [(ngModel)]="form.apellidousuario"
+                        required
+                        maxlength="25"
+                        #apellidousuario="ngModel"
+                        >  
+                    </mat-form-field>
+                </div>
+            </div>
+            </div>
+             
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <mat-icon>home</mat-icon>
+                        <mat-form-field appearance="fill" class="textoDT" > 
+                            <mat-label>Direccion</mat-label>
+                            <input matInput  disabled="false"
+                            type="text"
+                            class="form-control"
+                            name="direccion"
+                            [(ngModel)]="form.direccion"
+                            required
+                            maxlength="25"
+                            #direccion="ngModel"
+                            >  
+                        </mat-form-field>
+                      </div>
+                </div>
+                 <div class="col-sm-6">
+                    <div class="form-group">
+                        <mat-icon> phone</mat-icon>
+                        <mat-form-field appearance="fill" class="textoDT" > 
+                            <mat-label>Telefono</mat-label>
+                            <input matInput  disabled="false"
+                            type="text"
+                            class="form-control"
+                            name="telefono"
+                            [(ngModel)]="form.telefono"
+                            required
+                            maxlength="10"
+                            #telefono="ngModel"
+                            >  
+                        </mat-form-field>
+                       </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <mat-icon>calendar_today</mat-icon>
+                       <mat-form-field appearance="fill" class="textoDT" >
+                        <mat-label>Seleccione su fecha de nacimiento</mat-label>
+                        <input matInput [matDatepicker]="picker"  disabled="true"
+                          class="form-control"
+                          name="fechanacimiento"
+                          [(ngModel)]="form.fechanacimiento"
+                          required 
+                          #fechanacimiento="ngModel"
+                          >
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker ></mat-datepicker>
+                    </mat-form-field>
+                    
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <mat-icon>face</mat-icon>
+                        <mat-form-field appearance="fill" class="textoDT" > 
+                            <mat-label>Genero</mat-label>
+                            <input matInput  disabled="true"
+                            type="text"
+                            class="form-control"
+                            name="genero"
+                            [(ngModel)]="form.genero"
+                            required
+                            #genero="ngModel"
+                            >
+                        
+                        </mat-form-field>
+                       
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <mat-icon> email</mat-icon>
+                        <mat-form-field appearance="fill" class="textoDT">
+                            <mat-label>Email</mat-label>
+                            <input matInput  disabled="true"
+                             type="email"
+                             class="form-control"
+                             name="email"
+                             [(ngModel)]="form.email"
+                             required
+                             email
+                             #email="ngModel"
+                            >
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <mat-icon> </mat-icon>
+                        <mat-form-field appearance="fill" class="textoDT">
+                            <mat-label>Clave</mat-label>
+                            <input matInput  disabled="false"
+                             type="password"
+                             class="form-control"
+                             name="clave"
+                             [(ngModel)]="form.clave"
+                             maxlength="5"
+                             #clave="ngModel"
+                            >
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <button mat-raised-button color="primary">Editar</button>
+            </div>
+            
+            <div class="alert alert-warning" *ngIf="f.submitted && esEditadoFallido ">
+                Actualización fallida  <br> {{mensaje}}
+            </div>
+         </form>
+         <div class="alert alert-success" *ngIf="esExitoso">
+             Usuario actualizado exitosamente
+         </div>
+       </div>
+  
+   
+    </mat-card>
+    
+</div>
+<ng-template #loggedOut>
+    Porfavor iniciar sesión
+</ng-template>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+ </mat-dialog-actions>
+  
