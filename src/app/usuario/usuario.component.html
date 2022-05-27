@@ -8,7 +8,7 @@
         <div id="subtitulo"> <b> SERIE A</b></div>
           <div class="row pt-2" *ngFor="let equipo of equipos">
             <div class="col" >
-              <mat-card *ngIf="equipo.serie ===1">
+              <mat-card *ngIf="equipo.serie ===2">
                 <mat-card-title>{{equipo.nombre}}</mat-card-title>
                 <mat-card-subtitle>{{equipo.telefono}}</mat-card-subtitle>
                 <mat-card-content>
@@ -25,15 +25,14 @@
        </div>
       
        <div class="col-sm-6" >
-        <div id="subtitulo"> <b> SERIE B</b></div>
+        <div id="subtitulo"> <b> SERIE B </b></div>
         <div class="row pt-2" *ngFor="let equipo of equipos">
-          <div class="col">
-            <mat-card *ngIf="equipo.serie ===2">
+          <div class="col" *ngIf="equipo.serie ===1">
+            <mat-card >
               <mat-card-title>{{equipo.nombre}}</mat-card-title>
               <mat-card-subtitle>{{equipo.telefono}}</mat-card-subtitle>
               <mat-card-content>
                 {{equipo.direccion}}
-                
       
               </mat-card-content>
               <mat-card-actions>
@@ -52,7 +51,52 @@
       <div class="row">
        
         <div class="col">
-          <input type="file" >
+          <div class="subir-video">
+            <h1>Subir video</h1>
+           <form method="POST" action="/api/thumbnail-upload" enctype="multipart/form-data">
+            <div  class="form-group">
+              
+                <input type="file" name="file">
+           
+            </div>
+           
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Series</mat-label>
+                    <mat-select multiple
+                     required
+                     name="serieId"
+                    [(ngModel)]="form.serieId"
+                    #serieId="ngModel"
+                    (selectionChange)="cargarEquipos()"
+                    >
+                      <mat-option *ngFor="let serie of series" [value]="serie">{{serie.nombre}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group" *ngIf="equiposOpciones.length>0">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Equipos</mat-label>
+                    <mat-select  multiple
+                     required
+                     name="equiposId"
+                    >
+                      <mat-option *ngFor="let equipo of equiposOpciones" [value]="equipo">{{equipo.nombre}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" (click)="onFileSelected">Subir</button>
+
+           </form>
+          </div>
+         
         </div>
 
       </div>

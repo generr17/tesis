@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EquipoService } from '../services/equipo.service';
-
+import { Serie } from '../modelos/serie.model';
 @Component({
   selector: 'app-equipo',
   templateUrl: './equipo.component.html',
@@ -50,12 +50,4 @@ export class EquipoComponent implements OnInit {
      );
   }
 
-}
-class Serie {
-  id: number;
-  nombre: string;
-  constructor(idSerie:number, nombreSerie:string){
-    this.id = idSerie,
-    this.nombre= nombreSerie
-  };
 }
