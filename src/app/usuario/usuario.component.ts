@@ -7,6 +7,8 @@ import { EquipoService } from '../services/equipo.service';
 import { Equipo } from '../modelos/equipo.model';
 import { VideoService } from '../services/video.service';
 import { Serie } from '../modelos/serie.model';
+import { FileUploader } from 'ng2-file-upload';
+
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
@@ -23,12 +25,17 @@ export class UsuarioComponent implements OnInit {
   mensaje= '';
   form :any= {};
   esExitoso=false;
+  esRegistroFallido=false;
   @Input()
   requiredFileType:string;
+  vi='';
   fileName= '';
   constructor(private userService: UserService, private videoService: VideoService,private tokenStorageService: TokenStorageService, public dialog: MatDialog, private equipoService: EquipoService) { }
- 
-
+  public uploader: FileUploader = new FileUploader({
+    url: this.videoService.URL,
+    itemAlias: 'video'
+  });
+  
   cerrarsesion() {
     this.tokenStorageService.cerrarsesion();
     window.location.reload();
@@ -40,17 +47,7 @@ export class UsuarioComponent implements OnInit {
     
   }
 
-  onFileSelected(event: any){
-    const file: File = event.target.files[0];
-    console.log(file);
-    if (file) {
-      this.fileName = file.name;
-      const formData = new FormData();
-      formData.append("thumbnail", file);
-      const upload$ = this.videoService.guardarVideo(formData).subscribe();
-    
-    }
-  }
+  
   ngOnInit(): void {
    /* this.userService.obtenerContenidoUsuario().subscribe(
       data => {
@@ -63,7 +60,9 @@ export class UsuarioComponent implements OnInit {
 
     this.obtenerListaEquipo();
     this.obtenerListaSeries();
+    this.subirVideo();
   }
+
   obtenerListaEquipo(){
     this.equipoService.obtenerEquipos().subscribe(
       (data) => {
@@ -116,4 +115,34 @@ export class UsuarioComponent implements OnInit {
    
     
  }
+
+ subirVideo(){
+   
+   this.uploader.onAfterAddingFile=(file: any) => {
+     file.withCredentials = false;
+    console.log(file.file.size)
+   };
+   this.uploader.onCompleteItem = (item:any, status: any) => {
+     //console.log('Detalles del video a subir:' )
+    // console.log(item);
+     let resp=JSON.parse(item._xhr.responseText);
+     const videoUrl = resp.message;
+     const result=resp.success;
+     if(result){
+      this.videoService.guardarVideo(videoUrl, this.tokenStorageService.obtenerUsuario().id,1).subscribe(
+        data => {
+          console.log(data);
+          this.esExitoso = true;
+          this.esRegistroFallido = false;
+        },
+        err => {
+          this.mensaje = err.error.message;
+          this.esRegistroFallido = true;
+        }
+      );
+     }
+   }
+ }
+ 
+
 }

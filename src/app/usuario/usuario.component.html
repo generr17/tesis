@@ -53,11 +53,17 @@
         <div class="col">
           <div class="subir-video">
             <h1>Subir video</h1>
-           <form method="POST" action="/api/thumbnail-upload" enctype="multipart/form-data">
+           <form >
             <div  class="form-group">
               
-                <input type="file" name="file">
-           
+              <input type="file" name="video" ng2FileSelect [uploader]="uploader" accept="video/mp4"
+              [(ngModel)]="form.video"
+              #video="ngModel"
+              >
+              <button type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+               Subir
+              </button>
+              <video [src]="vi"></video>
             </div>
            
             <div class="row">
@@ -92,7 +98,7 @@
               </div>
             </div>
 
-            <button type="submit" (click)="onFileSelected">Subir</button>
+            <button type="submit">Subir</button>
 
            </form>
           </div>

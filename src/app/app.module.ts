@@ -30,7 +30,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import { MensajeComponent } from './mensaje/mensaje.component';
 import { VideoComponent } from './video/video.component';
-
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -65,7 +65,8 @@ import { VideoComponent } from './video/video.component';
     FormsModule,
     HttpClientModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    FileUploadModule
     
   ],
   providers: [authInterceptorProviders],
