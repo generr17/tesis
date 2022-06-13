@@ -18,10 +18,17 @@ export class VideoService {
 
     return this.http.post(API_URL+'guardar', {
       url:video,
-      usuarioId:usuario
+      usuarioId:usuario,
+      equipos: equipos
     }, httpOptions);
   };
 
- 
+ obtenerVideos(equipoId: number): Observable<any> {
+    return this.http.get(API_URL+'obtenerVideos/' +equipoId, { responseType: 'text' });
+    
+ }
+ reproducirVideo(video:any): Observable<any> {
+   return this.http.get(API_URL + "reproducir", video);
+ }
   
 }

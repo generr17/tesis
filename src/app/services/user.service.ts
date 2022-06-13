@@ -24,6 +24,9 @@ export class UserService {
           
     }, httpOptions);
   }
-
+   
+  obtenerUsuarioPorId (id:number): Observable<any>{
+   return this.http.get(API_URL + 'obtener/'+ id);
+  }
   
 }

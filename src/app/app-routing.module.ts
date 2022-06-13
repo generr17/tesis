@@ -9,6 +9,7 @@ import { AdministradorComponent } from './administrador/administrador.component'
 import { DirectivoComponent } from './directivo/directivo.component';
 import { EquipoComponent } from './equipo/equipo.component';
 import { VideoComponent } from './video/video.component';
+import { ListadoVideosComponent } from './listado-videos/listado-videos.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'administrador', component: AdministradorComponent},
   {path: 'directivo', component: DirectivoComponent},
   {path: 'equipo', component: EquipoComponent},
-  {path: 'video', component: VideoComponent},
+  {path: 'video/:video/:usuario', component: VideoComponent},
+  {path: 'videos', component: ListadoVideosComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 

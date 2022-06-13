@@ -49,6 +49,8 @@ export class LoginComponent implements OnInit {
       window.location.pathname='usuario';
     } else if (this.rol === 'admin') {
       window.location.pathname= 'administrador';
+    }else if (this.rol === "directivo"){
+      window.location.pathname='videos';
     }
   }
    

@@ -31,6 +31,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { MensajeComponent } from './mensaje/mensaje.component';
 import { VideoComponent } from './video/video.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ListadoVideosComponent } from './listado-videos/listado-videos.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     AdministradorComponent,
     DirectivoComponent,
     MensajeComponent,
-    VideoComponent
+    VideoComponent,
+    ListadoVideosComponent
   ],
   imports: [
     BrowserModule,

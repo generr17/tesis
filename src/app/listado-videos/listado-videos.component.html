@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row" *ngFor="let video of videos">
+
+        <div class="col">{{video.id}}</div>
+        <div class="col">{{video.usuario}}</div>
+        <div class="col">{{video.url}}</div>
+        <div class="col">{{video.fecha}}</div>
+        <div class="col" ><button (click)="reproducirVideo(video.url, video.usuario)">Ver video</button></div>
+        <div class="col">
+            
+        </div>
+         
+   
+    </div>

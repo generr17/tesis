@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { VideoService } from '../services/video.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-video',
   templateUrl: './video.component.html',
@@ -7,27 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VideoComponent implements OnInit {
 
-  fileName = '';
-  constructor() { }
+  public nombre : string
+  public url: string;
+  public usr: string;
+  constructor(private videoService: VideoService, private activateRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.nombre = this.activateRoute.snapshot.paramMap.get("video");
+    this.url = "http://localhost:3000/api/video/reproducir/"+ this.nombre;
+    this.usr = this.activateRoute.snapshot.paramMap.get("usuario");
+    //0987347110
   }
-
-  onFileSelected(event: any) {
-
-    const file:File = event.target.files[0];
-
-    if (file) {
-
-        this.fileName = file.name;
-
-        const formData = new FormData();
-
-        formData.append("thumbnail", file);
-
-       // const upload$ = this.http.post("/api/thumbnail-upload", formData);
-
-        //upload$.subscribe();
-    }
+  
+  
+  reproducir(){
+   
   }
+  
 }
