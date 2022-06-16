@@ -33,7 +33,8 @@ export class UsuarioComponent implements OnInit {
   requiredFileType:string;
   vi='';
   cargando= false;
-  fileName= '';
+ 
+  private  fileTemp:any;
   constructor(private userService: UserService, private videoService: VideoService,private tokenStorageService: TokenStorageService, public dialog: MatDialog, private equipoService: EquipoService) { }
   public uploader: FileUploader = new FileUploader({
     url: this.videoService.URL,
@@ -58,28 +59,29 @@ export class UsuarioComponent implements OnInit {
     this.obtenerListaEquipo();
  
     this.subirVideo();
+  
   }
 
   obtenerListaEquipo(){
-    this.equipoService.obtenerEquipos().subscribe(
-      (data) => {
-       let equipoDat = JSON.parse(data);
-       for (let i=0; i < equipoDat.length; i++){
-         var tipoA= this.series.find(serie => serie.nombre == "A");
-         var tipoB= this.series.find(serie => serie.nombre == "B");
-           if(equipoDat[i].serieId == tipoA.id){
-            this.equiposSA.push(new Equipo(Number(equipoDat[i].id),equipoDat[i].nombre,equipoDat[i].telefono, equipoDat[i].direccion, equipoDat[i].serieId));
-           } else if( equipoDat[i].serieId == tipoB.id){
-            this.equiposSB.push(new Equipo(Number(equipoDat[i].id),equipoDat[i].nombre,equipoDat[i].telefono, equipoDat[i].direccion, equipoDat[i].serieId)); 
-           }
-           this.equipos.push(new Equipo(Number(equipoDat[i].id),equipoDat[i].nombre,equipoDat[i].telefono, equipoDat[i].direccion, equipoDat[i].serieId)); 
-           
+      this.equipoService.obtenerEquipos().subscribe(
+        (data) => {
+         let equipoDat = JSON.parse(data);
+         for (let i=0; i < equipoDat.length; i++){
+            if(equipoDat[i].serieId == 1){
+              this.equiposSA.push(new Equipo(Number(equipoDat[i].id),equipoDat[i].nombre,equipoDat[i].telefono, equipoDat[i].direccion, equipoDat[i].serieId));
+             } else if( equipoDat[i].serieId == 2){
+              this.equiposSB.push(new Equipo(Number(equipoDat[i].id),equipoDat[i].nombre,equipoDat[i].telefono, equipoDat[i].direccion, equipoDat[i].serieId)); 
+             }
+             this.equipos.push(new Equipo(Number(equipoDat[i].id),equipoDat[i].nombre,equipoDat[i].telefono, equipoDat[i].direccion, equipoDat[i].serieId)); 
+             
+          }
+        },
+        err => {
+          this.mensaje = err.error.message;
         }
-      },
-      err => {
-        this.mensaje = err.error.message;
-      }
-    );
+      );
+    
+    
 
     
   }
@@ -103,16 +105,11 @@ export class UsuarioComponent implements OnInit {
         this.cargando= false;
       }
     );
-
-    setTimeout(() => {
-      this.cargarEquipos();
-    }, 1);
    
  }
 
  cargarEquipos(){
   
-   
    if(this.form.serieId){
     var seriesID=this.form.serieId;
     
@@ -137,51 +134,52 @@ export class UsuarioComponent implements OnInit {
       file.withCredentials = false;
      console.log(file.file.size)
     };
-  
       this.uploader.onCompleteItem = (item:any, status: any) => {
         //console.log('Detalles del video a subir:' )
        // console.log(item);
         let resp=JSON.parse(item._xhr.responseText);
         const videoUrl = resp.message;
         const result=resp.success;
-        console.log(videoUrl);
-         console.log(videoUrl);
+        console.log(videoUrl); 
         if(result){
+    
          this.vi = videoUrl;
          console.log(videoUrl);
-         if (this.form.equipoId.length>0) {
-           //var equip= this.form.equipoId;
-           for(let i=0; i < this.form.equipoId.length; i++){
+        //this.subirImagen(this.vi);
+        
+
+        if (this.form.equipoId.length>0) {
+          //var equip= this.form.equipoId;
+          for(let i=0; i < this.form.equipoId.length; i++){
+           
+                this.seleccionados.push(Number(this.form.equipoId[i].id)); 
             
-                 this.seleccionados.push(Number(this.form.equipoId[i].id)); 
-             
-           }
-          }else{
-            for(let i=0; i < this.equiposSB.length; i++){
-            
-              this.seleccionados.push(Number(this.equiposSB[i].id)); 
-            }
           }
-          console.log(this.seleccionados);
-         this.videoService.guardarVideo(videoUrl, this.tokenStorageService.obtenerUsuario().id,this.seleccionados).subscribe(
-           data => {
-             console.log(data);
-             this.esExitoso = true;
-             this.esRegistroFallido = false;
-           },
-           err => {
-             this.mensaje = err.error.message;
-             this.esRegistroFallido = true;
+         }else{
+           for(let i=0; i < this.equiposSB.length; i++){
+           
+             this.seleccionados.push(Number(this.equiposSB[i].id)); 
            }
-         )
-         
+         }
+         console.log(this.seleccionados);
+        this.videoService.guardarVideo(videoUrl,"", this.tokenStorageService.obtenerUsuario().id,this.seleccionados).subscribe(
+          data => {
+            console.log(data);
+            this.esExitoso = true;
+            this.esRegistroFallido = false;
+          },
+          err => {
+            this.mensaje = err.error.message;
+            this.esRegistroFallido = true;
+          }
+        )
         }
       }
-    
-    
-    
-   
+  
  }
- 
+
+
+    
+
 
 }

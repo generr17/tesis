@@ -42,7 +42,7 @@ export class ListadoVideosComponent implements OnInit {
   
   }
 
-  reproducirVideo(video: string, usuario: string){
+  reproducirVideo(video: string, usuario: number){
     alert(video);
     var vid=[video, usuario];
     this.router.navigate(['video', video, usuario]);

@@ -13,11 +13,13 @@ const httpOptions = {
 })
 export class VideoService {
  public URL = 'http://localhost:3000/api/video/subir';
+ public URLS = 'http://localhost:3000/api/video/subirImagen';
   constructor(private http: HttpClient) { }
-  guardarVideo(video: any, usuario:any, equipos:any): Observable<any> {
+  guardarVideo(video: any, imagen: any, usuario:any, equipos:any): Observable<any> {
 
     return this.http.post(API_URL+'guardar', {
       url:video,
+      imagen: "inva",
       usuarioId:usuario,
       equipos: equipos
     }, httpOptions);
@@ -31,4 +33,9 @@ export class VideoService {
    return this.http.get(API_URL + "reproducir", video);
  }
   
+ guardarImagen(body:FormData):Observable<any>{
+  return this.http.post(API_URL+"subirImagen",body,
+  httpOptions);
+
+ }
 }

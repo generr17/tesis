@@ -26,7 +26,7 @@ export class UserService {
   }
    
   obtenerUsuarioPorId (id:number): Observable<any>{
-   return this.http.get(API_URL + 'obtener/'+ id);
+   return this.http.get(API_URL + 'obtener/'+ id, {responseType: 'text'});
   }
   
 }
