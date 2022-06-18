@@ -30,7 +30,7 @@ export class ListadoVideosComponent implements OnInit {
        let videoDat = JSON.parse(data);
       
       for (let i=0; i < videoDat.length; i++){
-         this.videos.push(new Video(videoDat[i].id, videoDat[i].nombreusuario, videoDat[i].url, videoDat[i].createdAt));
+         this.videos.push(new Video(videoDat[i].id, videoDat[i].nombreusuario, videoDat[i].url, videoDat[i].imagen, videoDat[i].createdAt));
         }
       },
       err => {
@@ -53,11 +53,13 @@ class Video {
   id: number;
   usuario: string;
   url: string;
+  imagen:string;
   fecha: Date;
-  constructor (id:number ,usuario:string, url: string, fecha: Date){
+  constructor (id:number ,usuario:string, url: string, imagen:string, fecha: Date){
     this.id= id;
     this.usuario= usuario;
     this.url= url;
+    this.imagen=imagen;
     this.fecha= fecha;
   }
 }

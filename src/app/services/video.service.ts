@@ -19,7 +19,7 @@ export class VideoService {
 
     return this.http.post(API_URL+'guardar', {
       url:video,
-      imagen: "inva",
+      imagen: imagen,
       usuarioId:usuario,
       equipos: equipos
     }, httpOptions);
@@ -33,9 +33,5 @@ export class VideoService {
    return this.http.get(API_URL + "reproducir", video);
  }
   
- guardarImagen(body:FormData):Observable<any>{
-  return this.http.post(API_URL+"subirImagen",body,
-  httpOptions);
 
- }
 }

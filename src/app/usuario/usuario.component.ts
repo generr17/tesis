@@ -138,13 +138,16 @@ export class UsuarioComponent implements OnInit {
         //console.log('Detalles del video a subir:' )
        // console.log(item);
         let resp=JSON.parse(item._xhr.responseText);
+
         const videoUrl = resp.message;
         const result=resp.success;
+        const image= resp.imagenUrl;
         console.log(videoUrl); 
         if(result){
     
          this.vi = videoUrl;
-         console.log(videoUrl);
+         
+         
         //this.subirImagen(this.vi);
         
 
@@ -161,8 +164,8 @@ export class UsuarioComponent implements OnInit {
              this.seleccionados.push(Number(this.equiposSB[i].id)); 
            }
          }
-         console.log(this.seleccionados);
-        this.videoService.guardarVideo(videoUrl,"", this.tokenStorageService.obtenerUsuario().id,this.seleccionados).subscribe(
+        
+        this.videoService.guardarVideo(videoUrl,image, this.tokenStorageService.obtenerUsuario().id,this.seleccionados).subscribe(
           data => {
             console.log(data);
             this.esExitoso = true;
