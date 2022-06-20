@@ -32,6 +32,12 @@ import { MensajeComponent } from './mensaje/mensaje.component';
 import { VideoComponent } from './video/video.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ListadoVideosComponent } from './listado-videos/listado-videos.component';
+import {ButtonModule } from 'ng-cdbangular';
+import {CardModule } from 'ng-cdbangular';
+import { IframeModule } from 'ng-cdbangular';
+import { ViewModule} from 'ng-cdbangular';
+import {FooterModule } from  'ng-cdbangular';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +53,8 @@ import { ListadoVideosComponent } from './listado-videos/listado-videos.componen
     DirectivoComponent,
     MensajeComponent,
     VideoComponent,
-    ListadoVideosComponent
+    ListadoVideosComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +75,12 @@ import { ListadoVideosComponent } from './listado-videos/listado-videos.componen
     HttpClientModule,
     MatDialogModule,
     MatSelectModule,
-    FileUploadModule
+    FileUploadModule, 
+    ButtonModule,
+    CardModule,
+    IframeModule, 
+    ViewModule,
+    FooterModule
     
   ],
   providers: [authInterceptorProviders],

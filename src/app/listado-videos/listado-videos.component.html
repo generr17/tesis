@@ -1,26 +1,30 @@
+<div class="body">
 <div class="container">
-    <div class="row" *ngFor="let video of videos">
-
-        <div class="col-sm-3">
-          <mat-card class="example-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title></mat-card-title>
+ 
+    <div class="row">
+      <div class="row" >
+        <div class="col-md-4 p-3" *ngFor="let video of videos" >
+         <CDBCard clas="card" id="cd" >
+           <CDBCardImage class="img-fluid"  [src]="'http://localhost:3000/'+video.imagen" (click)="reproducirVideo(video.url, video.id)" >
+           </CDBCardImage>
+          
+           <CDBCardBody  id="cd">
+               <CDBCardTitle></CDBCardTitle>
+               <CDBCardText>
+                
+                <b>Subido: </b> 
+                {{video.fecha.toDateString()}}
+               <br>
+               <b>Por:</b> {{video.usuario}}
               
-            </mat-card-header>
-            <img mat-card-image [src]="'http://localhost:3000/'+video.imagen" alt="Photo of a Shiba Inu">
-           
-            <mat-card-footer>
-              {{video.usuario}} 
-              {{video.fecha}}
-            </mat-card-footer>
-            <mat-card-actions>
-              <button (click)="reproducirVideo(video.url, video.id)"mat-button >Ver video</button>
-            
-            </mat-card-actions>
-          </mat-card>
-          {{video.id}}</div>
-       
-         
+               </CDBCardText>
+           </CDBCardBody>
+       </CDBCard>
       
+        </div>
+
+     </div>
     </div>
+ 
+</div>
+</div>

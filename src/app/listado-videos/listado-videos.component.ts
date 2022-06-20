@@ -15,23 +15,28 @@ export class ListadoVideosComponent implements OnInit {
   videos : Video[]=[];
   usuarioActual: any;
   mensaje = '';
+  url: any;
 
   ngOnInit(): void {
     this.usuarioActual= this.tokenStorageService.obtenerUsuario();
    
     this.cargarVideos();
-
-    console.log(this.videos);
+    
+   
   }
 
   cargarVideos (){
     this.videoService.obtenerVideos(this.usuarioActual.equipoId).subscribe(
       (data) => {
        let videoDat = JSON.parse(data);
-      
-      for (let i=0; i < videoDat.length; i++){
-         this.videos.push(new Video(videoDat[i].id, videoDat[i].nombreusuario, videoDat[i].url, videoDat[i].imagen, videoDat[i].createdAt));
-        }
+     
+      for(let index=0; index<videoDat.length; index++){
+        let date= new Date(videoDat[index].createdAt);
+        let dt= new Date();
+         
+          this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date))
+      }
+    
       },
       err => {
         this.mensaje = err.error.message;
@@ -42,12 +47,14 @@ export class ListadoVideosComponent implements OnInit {
   
   }
 
+
   reproducirVideo(video: string, usuario: number){
     alert(video);
     var vid=[video, usuario];
     this.router.navigate(['video', video, usuario]);
   }
 }
+
 
 class Video {
   id: number;
