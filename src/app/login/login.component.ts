@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { RegistroComponent } from '../registro/registro.component';
 import { TokenStorageService } from '../services/token-storage.service';
 import { AuthService } from '../services/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-login',
@@ -15,8 +17,15 @@ export class LoginComponent implements OnInit {
   loginFallido = false;
   mensaje = '';
   rol: string = '';
-  constructor(private router: Router, private authService: AuthService, private tokenStorage: TokenStorageService) { }
-  
+  constructor(private router: Router, private authService: AuthService, private tokenStorage: TokenStorageService, private _snackBar: MatSnackBar) { }
+  ngOnInit(): void {
+    if (this.tokenStorage.obtenerToken()) {
+      this.estaLogeado = true;
+      this.rol = this.tokenStorage.obtenerUsuario().rolusuario;
+      
+    }
+  }
+ 
   irARegistrar(): void {
     this.router.navigate(['registro']);
   }
@@ -29,7 +38,8 @@ export class LoginComponent implements OnInit {
         this.loginFallido = false;
         this.estaLogeado = true;
         this.rol = this.tokenStorage.obtenerUsuario().rolusuario;
-       
+        let msg="Logeado como: " + this.rol;
+        this.openSnackBar(msg);
        this.reloadPage();
         //console.log("rol: " + this.rol);
         
@@ -37,10 +47,23 @@ export class LoginComponent implements OnInit {
       err => {
         this.mensaje = err.error.message;
         this.loginFallido = true;
+        this.openSnackBar("Login fallido:" + this.mensaje);
       }
     );
     
+    
     //this.router.navigate(['usuario']);
+  }
+
+  openSnackBar(mensaje: string) {
+    
+    this._snackBar.open(mensaje,"" ,{
+      duration: 5*1000,
+      horizontalPosition: "end",
+      verticalPosition: "top",
+      panelClass: ['warning']
+     });
+  
   }
 
   reloadPage(){
@@ -64,16 +87,4 @@ export class LoginComponent implements OnInit {
     }
   }
   
-
-  ngOnInit(): void {
-    if (this.tokenStorage.obtenerToken()) {
-      this.estaLogeado = true;
-      this.rol = this.tokenStorage.obtenerUsuario().rolusuario;    
-      
-      
-    }
-  }
- 
-
-
 }

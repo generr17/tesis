@@ -55,7 +55,7 @@
               role="alert"
               *ngIf="f.submitted && clave.invalid"
               >
-               El correo es requerido
+               La clave es requerida
               </div>
             </mat-form-field>
           </div>        
@@ -63,7 +63,7 @@
             <button mat-flat-button color="primary">Ingresar</button>
            </div>
   
-           <div class="form-group">
+           <!--div class="form-group">
              <div
              class="alert alert-danger"
              role="alert"
@@ -72,11 +72,11 @@
                Login Fallido: {{ mensaje }}
   
              </div>
-           </div>
+           </div-->
         </form>
-        <div class="alert alert-success" *ngIf="estaLogeado">
+        <!--div class="alert alert-success" *ngIf="estaLogeado">
            Logeado como {{rol}}
-        </div>
+        </div-->
         </mat-card-content>
         <mat-divider inset></mat-divider>
         <mat-card-actions>

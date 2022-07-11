@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { TokenStorageService } from '../services/token-storage.service';
 import {MatDialog} from '@angular/material/dialog';
@@ -8,7 +8,8 @@ import { Equipo } from '../modelos/equipo.model';
 import { VideoService } from '../services/video.service';
 import { Serie } from '../modelos/serie.model';
 import { FileUploader } from 'ng2-file-upload';
-
+import { MetodoDePagoComponent, Transaction } from '../metodo-de-pago/metodo-de-pago.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
@@ -16,8 +17,7 @@ import { FileUploader } from 'ng2-file-upload';
 })
 export class UsuarioComponent implements OnInit {
  
-   
-  
+
   equipos: Equipo[]=[];
   series: Serie[] = [];
   Series : Serie[] = [];
@@ -29,13 +29,13 @@ export class UsuarioComponent implements OnInit {
   form :any= {};
   esExitoso=false;
   esRegistroFallido=false;
-  @Input()
   requiredFileType:string;
+
   vi='';
   cargando= false;
- 
-  private  fileTemp:any;
-  constructor(private userService: UserService, private videoService: VideoService,private tokenStorageService: TokenStorageService, public dialog: MatDialog, private equipoService: EquipoService) { }
+   pago=false;  
+   transactions: Transaction[]=[];
+  constructor(private userService: UserService, private videoService: VideoService,private tokenStorageService: TokenStorageService, public dialog: MatDialog, private equipoService: EquipoService, private _snackBar: MatSnackBar) { }
   public uploader: FileUploader = new FileUploader({
     url: this.videoService.URL,
     itemAlias: 'video'
@@ -57,7 +57,7 @@ export class UsuarioComponent implements OnInit {
     
     this.obtenerListaSeries();
     this.obtenerListaEquipo();
- 
+   
     this.subirVideo();
   
   }
@@ -68,16 +68,17 @@ export class UsuarioComponent implements OnInit {
          let equipoDat = JSON.parse(data);
          for (let i=0; i < equipoDat.length; i++){
             if(equipoDat[i].serieId == 1){
-              this.equiposSA.push(new Equipo(Number(equipoDat[i].id),equipoDat[i].nombre,equipoDat[i].telefono, equipoDat[i].direccion, equipoDat[i].serieId));
+              this.equiposSA.push(new Equipo(Number(equipoDat[i].id),equipoDat[i].nombre,equipoDat[i].telefono, equipoDat[i].direccion, equipoDat[i].serieId, Number(equipoDat[i].precio)));
              } else if( equipoDat[i].serieId == 2){
-              this.equiposSB.push(new Equipo(Number(equipoDat[i].id),equipoDat[i].nombre,equipoDat[i].telefono, equipoDat[i].direccion, equipoDat[i].serieId)); 
+              this.equiposSB.push(new Equipo(Number(equipoDat[i].id),equipoDat[i].nombre,equipoDat[i].telefono, equipoDat[i].direccion, equipoDat[i].serieId, Number(equipoDat[i].precio))); 
              }
-             this.equipos.push(new Equipo(Number(equipoDat[i].id),equipoDat[i].nombre,equipoDat[i].telefono, equipoDat[i].direccion, equipoDat[i].serieId)); 
+             this.equipos.push(new Equipo(Number(equipoDat[i].id),equipoDat[i].nombre,equipoDat[i].telefono, equipoDat[i].direccion, equipoDat[i].serieId, Number(equipoDat[i].precio))); 
              
           }
         },
         err => {
           this.mensaje = err.error.message;
+          this.openSnackBar(this.mensaje);
         }
       );
     
@@ -103,6 +104,7 @@ export class UsuarioComponent implements OnInit {
       err => {
         this.mensaje = err.error.message;
         this.cargando= false;
+        this.openSnackBar(this.mensaje);
       }
     );
    
@@ -156,12 +158,14 @@ export class UsuarioComponent implements OnInit {
           for(let i=0; i < this.form.equipoId.length; i++){
            
                 this.seleccionados.push(Number(this.form.equipoId[i].id)); 
-            
+                this.transactions[i] = {item: this.form.equipoId[i].nombre, cost: this.form.equipoId[i].precio};
           }
          }else{
            for(let i=0; i < this.equiposSB.length; i++){
            
              this.seleccionados.push(Number(this.equiposSB[i].id)); 
+             this.transactions[i] = {item: this.equiposSB[i].nombre, cost: this.equiposSB[i].precio};
+        
            }
          }
         
@@ -170,10 +174,12 @@ export class UsuarioComponent implements OnInit {
             console.log(data);
             this.esExitoso = true;
             this.esRegistroFallido = false;
+            this.openSnackBar("Video subido exitosamente");
           },
           err => {
             this.mensaje = err.error.message;
             this.esRegistroFallido = true;
+            this.openSnackBar(this.mensaje);
           }
         )
         }
@@ -181,8 +187,39 @@ export class UsuarioComponent implements OnInit {
   
  }
 
+ abrirDialogoPago(){
+  var equipos;
+  console.log(this.equiposSB);
+  if (this.form.equipoId.length == 0) {
+    //var equip= this.form.equipoId;
+    equipos= this.equiposSB;
+   
+   
+   }else{
+    equipos= this.form.equipoId;
+   }
+   console.log(equipos)
+  const dialogRef = this.dialog.open(MetodoDePagoComponent, {
+    width: '300px',
+    data: {equipos: equipos, pago: this.pago},
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('Dialogo cerrado');
+    this.pago = result;
+  });
+ }
 
+
+ openSnackBar(mensaje: string) {
     
+  this._snackBar.open(mensaje,"" ,{
+    duration: 5*1000,
+    horizontalPosition: "end",
+    verticalPosition: "top",
+    panelClass: ['warning']
+   });
+
+}
 
 
 }

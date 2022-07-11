@@ -53,7 +53,11 @@
       <div class="col">
         <div class="subir-video">
           <h1>Subir video</h1>
-         <form >
+         <form class="formI"
+         name="form"
+         (ngSubmit)="f.form.valid "
+         #f="ngForm"
+         novalidate>
           <div  class="form-group">
             
             <input type="file" name="video" ng2FileSelect [uploader]="uploader" accept="video/mp4"
@@ -61,6 +65,12 @@
             #video="ngModel"
             required
             >
+            <div class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && video.invalid"
+            >
+             Debe seleccionar un video.
+            </div>
           </div>
           
           <div class="row">
@@ -77,6 +87,12 @@
                   >
                     <mat-option *ngFor="let serie of series" [value]="serie">{{serie.nombre}}</mat-option>
                   </mat-select>
+                  <div class="alert alert-danger"
+                  role="alert"
+                  *ngIf="f.submitted && serieId.invalid"
+                  >
+                  Seleccione una serie.
+                  </div>
                 </mat-form-field>
               </div>
             </div>
@@ -89,18 +105,27 @@
                    name="equipoId"
                    [(ngModel)]="form.equipoId"
                    #equipoId="ngModel"
+                  
                   >
                     <mat-option *ngFor="let equipo of equiposOpciones" [value]="equipo">{{equipo.nombre}}</mat-option>
                   </mat-select>
+                  <div class="alert alert-danger"
+                  role="alert"
+                  *ngIf="f.submitted && equipoId.invalid"
+                  >
+                  Debe seleccionar un equipo.
+                  </div>
                 </mat-form-field>
               </div>
             </div>
           </div>
-
-          <button type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+          <button mat-raised-button color="primary"  *ngIf="!pago" type="button" (click)="abrirDialogoPago()" [disabled]="!uploader.getNotUploadedItems().length || !form.equipoId">
             Subir
-           </button>
-
+          </button>
+          <button mat-raised-button color="accent" *ngIf="pago"  type="button" (click)="uploader.uploadAll()"  [disabled]="!uploader.getNotUploadedItems().length || !pago">
+            Subir
+          </button>
+          
          </form>
         </div>
        

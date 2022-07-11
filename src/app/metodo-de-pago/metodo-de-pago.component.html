@@ -1,0 +1,30 @@
+
+<h1 mat-dialog-title><b>Total a pagar</b></h1>
+<div mat-dialog-content>
+  <div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Equipo</th>
+        <th scope="col" style="text-align:right">Costo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let eq of data.equipos">
+        <td style="text-align:left">{{eq.nombre}}</td>
+        <td style="text-align:right">{{eq.precio}}</td>
+      </tr>
+     
+    </tbody>
+    <tfoot style="text-align:right">
+      <td ><b>Total</b></td>
+      <td>{{producto.precio}}</td>
+    </tfoot>
+  </table>
+  </div>
+
+<div #paypal></div>
+ 
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data.pago" cdkFocusInitial>Cerrar</button>
+</div>

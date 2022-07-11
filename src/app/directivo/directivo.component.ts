@@ -26,7 +26,7 @@ export class DirectivoComponent implements OnInit {
        let equipo = JSON.parse(data);
        for (let i=0; i < equipo.length; i++){
          this.equiposNombre.push(equipo[i].nombre);
-         this.equipos.push(new Equipo(Number(equipo[i].id),equipo[i].nombre,equipo[i].telefono, equipo[i].direccion, equipo[i].serie )); 
+         this.equipos.push(new Equipo(Number(equipo[i].id),equipo[i].nombre,equipo[i].telefono, equipo[i].direccion, equipo[i].serie, Number(equipo[i].precio))); 
        }
       },
       err => {

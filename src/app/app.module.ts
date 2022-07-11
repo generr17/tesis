@@ -38,7 +38,9 @@ import { IframeModule } from 'ng-cdbangular';
 import { ViewModule} from 'ng-cdbangular';
 import {FooterModule } from  'ng-cdbangular';
 import { FooterComponent } from './footer/footer.component';
-
+import { MetodoDePagoComponent } from './metodo-de-pago/metodo-de-pago.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +56,8 @@ import { FooterComponent } from './footer/footer.component';
     MensajeComponent,
     VideoComponent,
     ListadoVideosComponent,
-    FooterComponent
+    FooterComponent,
+    MetodoDePagoComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,9 @@ import { FooterComponent } from './footer/footer.component';
     CardModule,
     IframeModule, 
     ViewModule,
-    FooterModule
+    FooterModule,
+    MatTableModule,
+    MatSnackBarModule
     
   ],
   providers: [authInterceptorProviders],
