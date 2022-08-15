@@ -3,6 +3,9 @@ import { TokenStorageService } from '../services/token-storage.service';
 import { VideoService } from '../services/video.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { SuscripcionesComponent } from '../suscripciones/suscripciones.component';
+import { UserService } from '../services/user.service';
+
 
 @Component({
   selector: 'app-listado-videos',
@@ -11,15 +14,15 @@ import { Router } from '@angular/router';
 })
 export class ListadoVideosComponent implements OnInit {
 
-  constructor(private videoService: VideoService,private tokenStorageService: TokenStorageService, public dialog: MatDialog, private router: Router) { }
+  constructor(private videoService: VideoService,private tokenStorageService: TokenStorageService, public dialog: MatDialog, private usuarioService: UserService, private router: Router) { }
   videos : Video[]=[];
   usuarioActual: any;
   mensaje = '';
   url: any;
-
+  pago:false;
   ngOnInit(): void {
     this.usuarioActual= this.tokenStorageService.obtenerUsuario();
-   
+    console.log(this.usuarioActual);
     this.cargarVideos();
     
    
@@ -49,9 +52,43 @@ export class ListadoVideosComponent implements OnInit {
 
 
   reproducirVideo(video: string, usuario: number){
-    alert(video);
-    var vid=[video, usuario];
-    this.router.navigate(['video', video, usuario]);
+    console.log(this.usuarioActual.suscrito);
+   
+    if(this.usuarioActual.suscrito === 1){
+      var vid=[video, usuario];
+      this.router.navigate(['video', video, usuario]);
+    }else  if(this.usuarioActual.suscrito === 0){
+      const dialogRef = this.dialog.open(SuscripcionesComponent, {
+        width: '500px',
+        //revisar
+        data: {pago: this.pago},
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('Dialogo cerrado: ', result);
+        this.pago = result; 
+        console.log(this.pago);
+        if(this.pago){
+          this.obtenerUsuarioPorId();
+          console.log(result);
+        }
+      });
+    }
+
+   
+  }
+
+  obtenerUsuarioPorId(){
+    this.usuarioService.obtenerUsuarioPorId(this.usuarioActual.id).subscribe(
+      (data) => {
+        let user = JSON.parse(data);
+      this.usuarioActual.suscrito = user.suscrito;
+       this.tokenStorageService.guardarUsuario(user);
+       },
+       err => {
+         this.mensaje = err.error.message;
+         
+       }
+    );
   }
 }
 

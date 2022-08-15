@@ -1,5 +1,5 @@
 
-  <div class="container-fluid" >
+  <div class="container-fluid" *ngIf="cargando">
     <div class="row-justify-content-center"  >
   
    <div class="row" >
@@ -21,7 +21,7 @@
               <CDBCardText class="text-muted">{{usuario.direccion}}</CDBCardText>
               <div class="mt-3">
                   
-                  <CDBBtn class="ml-3" size="small" color="warning"> Enviar Mensaje </CDBBtn>
+                  <CDBBtn class="ml-3" size="small" color="warning" (click)="mostrar=true"> Enviar Mensaje </CDBBtn>
               </div>
           </CDBCardBody>
       </CDBCard>
@@ -30,16 +30,45 @@
       <div class="col-sm-9">
         
           <CDBCard  [border]=true >
-        
-            <CDBCardBody>
+            <div class="container-fluid">
               <video controls autoplay [muted]="'muted'" class="videoComp" >
                 <source [src]="url" type="video/mp4">
                </video>
-            </CDBCardBody>
-            
+
+            </div>
         </CDBCard>
         </div> 
-      
+        <div *ngIf="mostrar === true" >
+          <div class="card text-center cardContainer" >
+            <div class="card-header">
+              <mat-card-title></mat-card-title>
+              
+                <div style="float: left;">{{usuario.nombre}}  {{usuario.apellido}}</div>
+                <div style="float: right;"><button (click)="mostrar=false">X</button></div>
+             
+            </div>
+            <div class="card-body">
+             <div id="contenedorMensajes" class="contenedorDeMensajes h-100">
+                <p *ngFor=" let mensaje of mensajes" class="mensaje p-2"
+                [ngClass]="(usuarioActual.id==mensaje.emisor)? 'enviado': 'recibido'"
+                >
+                  {{mensaje.texto}}
+                </p>
+        
+             </div>
+            </div>
+            <form class="card-footer text-muted input-group" (ngSubmit)="enviarMensaje()">
+                <input type="text" class="form-control" placeholder="Ingrese su mensaje" [(ngModel)] ="nuevoMensaje" [ngModelOptions]="{standalone: true}">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2">
+                        <button mat-icon-button type="submit">
+                            <mat-icon type="submit">send</mat-icon>
+                          </button>
+                    </span>
+                </div>
+            </form>
+          </div>
+        </div>
         
    </div>
    

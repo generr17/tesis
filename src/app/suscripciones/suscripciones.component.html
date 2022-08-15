@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 p-3" *ngFor="let suscripcion of suscripciones" >
+            <div class="card text-center">
+                <div class="card-header">{{suscripcion.nombre}}</div>
+                <div class="card-body">
+                  <h5 class="card-title">{{suscripcion.descripcion}}</h5>
+                  <p class="card-text">{{suscripcion.precio}}</p>
+                  <button mat-raised-button color="primary"  *ngIf="!pago" type="button" (click)="abrirDialogoPago(suscripcion)" >
+                    Subir
+                  </button>
+                </div>
+                <div class="card-footer text-muted">{{suscripcion.nota}}</div>
+              </div>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button [mat-dialog-close]="data.pago" cdkFocusInitial>Cerrar</button>
+    </div>
+</div>

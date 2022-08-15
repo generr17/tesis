@@ -1,0 +1,67 @@
+
+  .container {
+    justify-content: center;
+    align-items: center;
+  
+    width: 350px;
+    
+}
+.row {
+  padding-top: 3%;
+ padding-bottom: 3%;
+}
+.card {
+  align-items: center;
+  justify-content: center;
+  text-align: center; 
+  box-shadow: 2px 2px 7px 6px rgba(97,49,55,0.69);
+}
+
+.form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 80%;
+    padding-top: 5%;
+  
+  }
+  .mat-card {
+    max-width: 350px;
+    align-items: center;
+    align-content: center;
+    text-align: justify;
+  }
+  
+  .mat-card-header {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center; 
+    color: darkblue;
+    font-size: x-large;
+    padding-top: 3%;
+    background-color: lightblue;
+    
+}
+
+.mat-card-content {
+    text-align: justify;
+    justify-content: left;
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    padding-top: 5%;
+    
+}
+
+.button {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+::ng-deep .warning{
+  background: darkblue;
+}
+
+  

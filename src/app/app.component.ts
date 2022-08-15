@@ -8,7 +8,7 @@ import { TokenStorageService } from './services/token-storage.service';
 })
 export class AppComponent  implements OnInit{
   title = 'tesis-prueba-app';
-  private roles: string[];
+  private roles: number[]= [];
   estaLogeado = false;
   mostrarVentanaAdministrador = false;
   mostrarVentanaDirectivo = false;
@@ -20,10 +20,16 @@ export class AppComponent  implements OnInit{
     this.estaLogeado = !!this.tokenStorageService.obtenerToken();
     if (this.estaLogeado) {
       const usuario = this.tokenStorageService.obtenerUsuario();
-      this.roles = usuario.rolusuario;
-      this.mostrarVentanaAdministrador = this.roles.includes('admin');
-      this.mostrarVentanaDirectivo = this.roles.includes('directivo');
-      this.mostrarVentanaUsuario = this.roles.includes('usuario');
+      console.log("usuario logeado: " , usuario);
+      this.roles = usuario.roleId;
+      if(usuario.roleId === 1){
+        this.mostrarVentanaAdministrador = true;
+      }else if(usuario.roleId === 2) {
+        this.mostrarVentanaDirectivo = true;
+      }else if(usuario.roleId === 3){
+        this.mostrarVentanaUsuario = true;
+      }
+      
       this.nombreusuario = usuario.nombreusuario;
       console.log(this.estaLogeado);
     }

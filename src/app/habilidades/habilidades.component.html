@@ -1,0 +1,39 @@
+
+<div class="container">
+  
+    <div class="row">
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title>
+            <h1><b>Habilidades</b></h1></mat-card-title>
+        </mat-card-header>
+           
+       <mat-divider></mat-divider>
+       
+        <mat-card-content>
+          <mat-progress-bar mode="determinate" value="50"></mat-progress-bar>
+          <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+            <label>Seleccione sus habilidades: </label>
+            <br>
+            <div *ngFor="let habilidad of habilidades; let i=index">
+              <div class="form-group">
+                <label>
+                  <input type="checkbox" formArrayName="selectedHabilidades" [value]="habilidad.id" (change)="onCheckboxChange($event)" 
+                  />
+                  {{habilidad.nombre}}
+                </label>
+              
+              </div>
+             
+            </div>
+            <mat-divider></mat-divider>
+            <button  mat-raised-button color="primary" type="submit">Guardar</button>
+          </form>
+        </mat-card-content>
+        
+       
+     
+      </mat-card>
+   
+    </div>
+</div>

@@ -1,0 +1,86 @@
+
+.cl {
+    border-right: solid rosybrown;
+    background-color: cornsilk;
+    
+}
+
+
+.rw {
+    border: solid rosybrown;
+    background-color: cornsilk;
+}
+
+.card-body {
+    background-color: cornsilk;
+}
+
+.imagen {
+    background:transparent;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    opacity:0.2;
+   
+}
+
+.mat-card {
+    opacity:0.7;
+
+}
+
+.nuevo {
+    background-color: rgb(221, 125, 154);
+    color: white;
+}
+
+.text {
+    color: black;
+}
+
+.encabezado {
+    border-color: brown;
+    border-width: 10px;
+    
+}
+
+.enviado{
+    display: block;
+    float: right;
+    //background-color: teal;
+    color: black;
+    //min-width: 50.01%;
+   // border-radius: 10px;
+    text-align: right;
+    align-items: right;
+    align-content: right;
+   }
+   
+   .recibido{
+    display: block;
+    float: left;
+   // background-color: rgb(223, 219, 219);
+    color: black;
+    min-width: 50.01%;
+    border-radius: 10px;
+    text-align: left;
+    align-items: left;
+    align-content: left;
+    justify-content: left;
+   }
+
+   #mensajeEntrada {
+    width: 100%;
+    position:absolute;                 
+    bottom:0;                         
+    left:0; 
+   }
+   
+
+   .contenedorDeMensajes{
+    overflow-y: scroll;
+    padding: 0.3rem;
+}
+.contenedorDeMensajes::-webkit-scrollbar {
+    display: none;
+}

@@ -8,7 +8,8 @@ export class Usuario {
     direccion: string;
     genero: string;
     correo: string;
-    constructor( nombre:string, apellido: string, telefono:string, fechanacimiento:Date, direccion:string, genero: string, correo:string){
+    suscrito: number; 
+    constructor( nombre:string, apellido: string, telefono:string, fechanacimiento:Date, direccion:string, genero: string, correo:string, suscrito: number){
       
       this.nombre= nombre,
       this.apellido= apellido,
@@ -16,6 +17,7 @@ export class Usuario {
       this.fechanacimiento= fechanacimiento,
       this.direccion= direccion,
       this.genero = genero,
-      this.correo = correo
+      this.correo = correo,
+      this.suscrito = suscrito
 };
 }

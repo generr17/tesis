@@ -23,8 +23,11 @@ export class MetodoDePagoComponent implements OnInit {
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
   ngOnInit(): void {
    
+     console.log("Dato: ", this.data.equipos);
+   
+   
+      this.producto.precio= this.getTotalCost();
     
-    this.producto.precio= this.getTotalCost();
     paypal
     .Buttons({
       createOrder: (data:any, actions:any) => {
@@ -64,8 +67,10 @@ export class MetodoDePagoComponent implements OnInit {
 export interface DialogData {
   equipos: Equipo[];
   pago: boolean;
+  tipo: Number;
 }
 export interface Transaction {
   item: string;
   cost: number;
+  tipo: number;
 }

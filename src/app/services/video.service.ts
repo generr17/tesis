@@ -29,6 +29,10 @@ export class VideoService {
     return this.http.get(API_URL+'obtenerVideos/' +equipoId, { responseType: 'text' });
     
  }
+
+ obtenerSuscripciones(): Observable<any> {
+  return this.http.get('http://localhost:3000/obtenerSuscripciones', { responseType: 'text' });
+ }
  reproducirVideo(video:any): Observable<any> {
    return this.http.get(API_URL + "reproducir", video);
  }

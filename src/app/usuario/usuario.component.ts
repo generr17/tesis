@@ -35,6 +35,7 @@ export class UsuarioComponent implements OnInit {
   cargando= false;
    pago=false;  
    transactions: Transaction[]=[];
+   tipo=1;
   constructor(private userService: UserService, private videoService: VideoService,private tokenStorageService: TokenStorageService, public dialog: MatDialog, private equipoService: EquipoService, private _snackBar: MatSnackBar) { }
   public uploader: FileUploader = new FileUploader({
     url: this.videoService.URL,
@@ -158,13 +159,14 @@ export class UsuarioComponent implements OnInit {
           for(let i=0; i < this.form.equipoId.length; i++){
            
                 this.seleccionados.push(Number(this.form.equipoId[i].id)); 
-                this.transactions[i] = {item: this.form.equipoId[i].nombre, cost: this.form.equipoId[i].precio};
+                this.transactions[i] = {item: this.form.equipoId[i].nombre, cost: this.form.equipoId[i].precio,tipo: this.tipo};
           }
          }else{
            for(let i=0; i < this.equiposSB.length; i++){
            
              this.seleccionados.push(Number(this.equiposSB[i].id)); 
-             this.transactions[i] = {item: this.equiposSB[i].nombre, cost: this.equiposSB[i].precio};
+             this.transactions[i] = {item: this.equiposSB[i].nombre, cost: this.equiposSB[i].precio, tipo: this.tipo};
+
         
            }
          }
@@ -201,7 +203,7 @@ export class UsuarioComponent implements OnInit {
    console.log(equipos)
   const dialogRef = this.dialog.open(MetodoDePagoComponent, {
     width: '300px',
-    data: {equipos: equipos, pago: this.pago},
+    data: {equipos: equipos, pago: this.pago, tipo: this.tipo},
   });
   dialogRef.afterClosed().subscribe(result => {
     console.log('Dialogo cerrado');

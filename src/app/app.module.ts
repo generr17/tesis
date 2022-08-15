@@ -41,6 +41,13 @@ import { FooterComponent } from './footer/footer.component';
 import { MetodoDePagoComponent } from './metodo-de-pago/metodo-de-pago.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HabilidadesComponent } from './habilidades/habilidades.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { SuscripcionesComponent } from './suscripciones/suscripciones.component';
+import { PagoSuscripcionComponent } from './pago-suscripcion/pago-suscripcion.component';
+import { ChatComponent } from './chat/chat.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +64,11 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     VideoComponent,
     ListadoVideosComponent,
     FooterComponent,
-    MetodoDePagoComponent
+    MetodoDePagoComponent,
+    HabilidadesComponent,
+    SuscripcionesComponent,
+    PagoSuscripcionComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +96,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     ViewModule,
     FooterModule,
     MatTableModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    MatProgressBarModule
     
   ],
   providers: [authInterceptorProviders],

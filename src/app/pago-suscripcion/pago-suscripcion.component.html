@@ -1,18 +1,19 @@
 
 <h1 mat-dialog-title><b>Total a pagar</b></h1>
+
 <div mat-dialog-content>
   <div class="table-responsive">
   <table class="table" >
     <thead>
       <tr>
-        <th scope="col">Equipo</th>
-        <th scope="col" style="text-align:right">Costo</th>
+        <th scope="col">Suscripción</th>
+        <th scope="col" style="text-align:right">Precio</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let eq of data.equipos">
-        <td style="text-align:left">{{eq.nombre}}</td>
-        <td style="text-align:right">{{eq.precio}}</td>
+      <tr >
+        <td style="text-align:left">{{data.suscripcion.nombre}}</td>
+        <td style="text-align:right">{{data.suscripcion.precio}}</td>
       </tr>
      
     </tbody>
@@ -23,9 +24,10 @@
   </table>
  
   </div>
-  
+
 <div #paypal></div>
  
 <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="data.pago" cdkFocusInitial>Cerrar</button>
 </div>
+

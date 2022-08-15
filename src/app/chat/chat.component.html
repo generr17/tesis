@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row pt-2" >
+    <div class="card mb-3  rw" style="max-width: 7000px;">
+      <div class="row no-gutters " >
+        <div class="col-sm-4 cl"  >
+         <div class="row pt-2 " *ngFor="let room of chatsRooms">
+          <div class="col" (click)="cargarMensajes(room.id, room.usuario)" >
+            <mat-card class="mat-card container-fluid"  [ngClass]="(usuarioActual.id != room.emisor && room.estado === 0)? 'nuevo': 'text'">
+              <mat-card-title>{{room.usuario}}</mat-card-title>
+              <mat-card-content>{{room.texto}}</mat-card-content>
+            </mat-card>
+          </div>
+          
+         </div>
+          
+
+        </div>
+        <div class="col-md-8" style="height: 550px;">
+          
+          <div class="card-body contenedorDeMensajes h-100" id="contenedorMensajes" *ngIf="mensajes.length>0" >
+           
+            <h1 class="card-title"><b>{{nombreUsuario}}</b></h1>
+            <mat-divider></mat-divider>
+           
+            <div *ngFor="let sms of mensajes" > 
+              
+                <div class="row pt-2" >
+                  <div class="col" >
+                    <span class="mensaje" [ngClass]="(usuarioActual.id == sms.usuarioId)? 'enviado': 'recibido'">
+                      
+                      <p >{{sms.mensaje}}</p>
+                    
+                      <p class="card-text"><small class="text-muted">{{sms.fecha}}</small></p>
+                    </span>
+                  </div>
+                 
+                </div>
+            </div>
+         
+          </div>
+          <div class="card-body imagen" *ngIf="mensajes.length == 0"  style=" align-items: center;">
+            
+            <img src="https://cdn.pixabay.com/photo/2016/11/30/18/14/chat-1873536_1280.png" style="width: 470px;">
+          </div>
+          <div class="row">
+            <div id="mensajeEntrada" *ngIf="mensajes.length>0">
+              <form class="card-footer text-muted input-group" (ngSubmit)="enviarMensaje()">
+                <textarea type="text" class="form-control" placeholder="Ingrese su mensaje" [(ngModel)] ="nuevoMensaje" [ngModelOptions]="{standalone: true}"></textarea>
+               <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2">
+                        <button mat-icon-button type="submit">
+                            <mat-icon type="submit">send</mat-icon>
+                          </button>
+                    </span>
+                </div>
+            </form>
+            </div>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
