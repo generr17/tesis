@@ -1,0 +1,40 @@
+
+    <div class="container pt-2 container-fluid">
+      <div class="row justify-content-center">
+        <mat-form-field  appearance="fill">
+          <mat-label>Buscar</mat-label>
+          <input matInput type="text" [(ngModel)]="value" (keyup)="buscarVideos()">
+          <button  matSuffix mat-icon-button >
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+        
+      </div>
+        <div class="row">
+          <div class="row" >
+            <div class="col-md-4 p-3" *ngFor="let video of videos" >
+             <CDBCard clas="card" id="cd" >
+               
+              
+              <img class="img-fluid"  [src]="'http://localhost:3000/'+video.imagen"  >
+               <CDBCardBody  id="cd">
+                   <CDBCardTitle><b>{{video.titulo}}</b></CDBCardTitle>
+                   <CDBCardText>
+                    <span>{{video.descripcion}}</span>
+                    <br>
+                    <b>Subido: </b> 
+                    {{video.fecha.toDateString()}}
+                   <br>
+                 
+                  
+                   </CDBCardText>
+               </CDBCardBody>
+           </CDBCard>
+          
+            </div>
+    
+         </div>
+        </div>
+     
+    </div>
+   

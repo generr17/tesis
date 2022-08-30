@@ -1,18 +1,18 @@
 
 .cl {
     border-right: solid rosybrown;
-    background-color: cornsilk;
+    background-color: transparent; //cornsilk;
     
 }
 
 
 .rw {
     border: solid rosybrown;
-    background-color: cornsilk;
+    background-color: #FCF7B3;
 }
 
 .card-body {
-    background-color: cornsilk;
+    background-color: transparent; //cornsilk;
 }
 
 .imagen {
@@ -80,6 +80,8 @@
    .contenedorDeMensajes{
     overflow-y: scroll;
     padding: 0.3rem;
+    padding-bottom: 120px;
+
 }
 .contenedorDeMensajes::-webkit-scrollbar {
     display: none;

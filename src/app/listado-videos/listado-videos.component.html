@@ -1,22 +1,38 @@
 <div class="body">
-<div class="container">
- 
-    <div class="row">
-      <div class="row" >
+<div class="container container-fluid">
+  <div class="row justify-content-center pb-3 pt-3">
+    <mat-form-field  appearance="fill">
+      <mat-label>Buscar</mat-label>
+      <input matInput type="text" [(ngModel)]="value"  (keyup)="buscarVideos()">
+      <button  matSuffix mat-icon-button >
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+    
+  </div>
+    
+      <div class="row" *ngIf="videos.length > 0">
         <div class="col-md-4 p-3" *ngFor="let video of videos" >
          <CDBCard clas="card" id="cd" >
            <CDBCardImage class="img-fluid"  [src]="'http://localhost:3000/'+video.imagen" (click)="reproducirVideo(video.url, video.id)" >
            </CDBCardImage>
           
            <CDBCardBody  id="cd">
-               <CDBCardTitle></CDBCardTitle>
+               <CDBCardTitle >
+                <h2><b>{{video.titulo}}</b></h2>
+               </CDBCardTitle>
                <CDBCardText>
-                
-                <b>Subido: </b> 
-                {{video.fecha.toDateString()}}
-               <br>
-               <b>Por:</b> {{video.usuario}}
+                <p>{{video.descripcion}}</p><br>
+                <mat-divider></mat-divider>
+                <div class="div" align="end">
+                  <span>  <b>Subido: </b> 
+                    {{video.fecha.toDateString()}}
+                   <br>
+                   <br>
+                   <b>Por:</b> {{video.usuario}}</span>
+                </div>
               
+             
                </CDBCardText>
            </CDBCardBody>
        </CDBCard>
@@ -24,7 +40,9 @@
         </div>
 
      </div>
-    </div>
+   <div class="row  pt-2 justify-content-center" *ngIf="videos.length === 0">
+    <mat-card>No hay videos para mostras.</mat-card>
+   </div>
  
 </div>
 </div>

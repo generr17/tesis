@@ -6,12 +6,15 @@
     padding-top: 2%;
     padding-bottom: 2%;
     width: 350px;
-    
+    background: transparent;
+    background-color: transparent;
 }
 
 .row {
   padding-top: 3%;
  padding-bottom: 3%;
+ background: transparent;
+ background-color: transparent;
 }
 .card {
   align-items: center;
@@ -36,7 +39,7 @@
   
   .icono {
       font-size: 45px;
-      color: darkblue;
+      color: #474301;
   }
 
 
@@ -45,18 +48,19 @@
     align-items: center;
     justify-content: center;
     align-content: center; 
-    color: darkblue;
+    color: #474301;
     font-size: x-large;
     padding-top: 3%;
-    background-color: lightblue;
+    background-color: #E2B202;
 }
 
 .texto {
   width: 80%;
 }
 
+
 ::ng-deep .warning{
-  background: darkblue;
+  background: #474301;
 }
 
   

@@ -30,7 +30,7 @@ export class UsuarioComponent implements OnInit {
   esExitoso=false;
   esRegistroFallido=false;
   requiredFileType:string;
-
+  load = false;
   vi='';
   cargando= false;
    pago=false;  
@@ -76,6 +76,7 @@ export class UsuarioComponent implements OnInit {
              this.equipos.push(new Equipo(Number(equipoDat[i].id),equipoDat[i].nombre,equipoDat[i].telefono, equipoDat[i].direccion, equipoDat[i].serieId, Number(equipoDat[i].precio))); 
              
           }
+          this.load =true;
         },
         err => {
           this.mensaje = err.error.message;
@@ -171,12 +172,14 @@ export class UsuarioComponent implements OnInit {
            }
          }
         
-        this.videoService.guardarVideo(videoUrl,image, this.tokenStorageService.obtenerUsuario().id,this.seleccionados).subscribe(
+        this.videoService.guardarVideo(videoUrl,image, this.tokenStorageService.obtenerUsuario().id,this.seleccionados, this.form.titulo, this.form.descripcion).subscribe(
           data => {
             console.log(data);
             this.esExitoso = true;
             this.esRegistroFallido = false;
             this.openSnackBar("Video subido exitosamente");
+            this.form.reset();
+            this.pago = false;
           },
           err => {
             this.mensaje = err.error.message;
@@ -191,6 +194,7 @@ export class UsuarioComponent implements OnInit {
 
  abrirDialogoPago(){
   var equipos;
+  console.log(this.form.titulo, this.form.descripcion);
   console.log(this.equiposSB);
   if (this.form.equipoId.length == 0) {
     //var equip= this.form.equipoId;

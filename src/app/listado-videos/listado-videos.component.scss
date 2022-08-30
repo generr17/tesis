@@ -1,11 +1,11 @@
-.body{
-  background:  #D2A7B9
-}
+
 .container {
   align-items: center;
   align-content: center;
   text-align: center;
-  background:  #D2A7B9
+  background: transparent;
+  background-color: transparent;
+  //background:  #D2A7B9
 }
 .card {
   width: 25rem;
@@ -16,6 +16,7 @@
  #cd {
   color: black;
   text-align: justify;
-  background:  #D2A7B9
+  background-color: #E2B202;
+ // background:  #
   
  }

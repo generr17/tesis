@@ -28,6 +28,7 @@
                              class="form-control"
                              name="nombreusuario"
                              [(ngModel)]="form.nombreusuario"
+                             onKeypress="if ((event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122)) event.returnValue = false;"
                              required
                              minlength="3"
                              maxlength="25"
@@ -52,6 +53,7 @@
                              type="text"
                              class="form-control"
                              name="apellidousuario"
+                             onKeypress="if ((event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122)) event.returnValue = false;"
                              [(ngModel)]="form.apellidousuario"
                              required
                              minlength="4"
@@ -102,14 +104,16 @@
                          <mat-form-field appearance="fill" class="textoDT" > 
                              <mat-label>Ingrese su telefono</mat-label>
                              <input matInput placeholder="Telefono usuario" 
-                             type="number"
+                             type="text"
                              class="form-control"
                              name="telefono"
                              [(ngModel)]="form.telefono"
+                             onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
                              required
-                             minlength="10"
+                             minlength="5"
                              maxlength="10"
                              #telefono="ngModel"
+                             
                              >
                              <div class="alert alert-danger"
                              role="alert"
@@ -215,21 +219,15 @@
                  </div>
                    
                  
-                     <button mat-raised-button color="primary">Crear cuenta</button>
+                     <button mat-raised-button style="background-color: #E7AD31;">Crear cuenta</button>
                  
-                 
-                 <!--div class="alert alert-warning" *ngIf="f.submitted && esRegistroFallido ">
-                     Registro fallido <br> {{mensaje}}
-                 </div-->
               </form>
-              <!--div class="alert alert-success" *ngIf="esExitoso">
-                  Usuario registrado exitosamente
-              </div-->
+             
             </div>
               </mat-card-content>
           <mat-divider inset></mat-divider>
           <mat-card-actions>
-             Ya tienes una cuenta creada <button mat-stroked-button color="primary" (click)="irAIniciarSesion()" >Inicia sesión</button> 
+             Ya tienes una cuenta creada <button mat-stroked-button style="border-color: #E7AD31;" (click)="irAIniciarSesion()" >Inicia sesión</button> 
          </mat-card-actions>
      
          </mat-card>

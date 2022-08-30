@@ -1,16 +1,14 @@
-
-  <div class="container-fluid" *ngIf="cargando">
+ <app-cargando *ngIf="!cargando"></app-cargando>
+  <div class="container-fluid pb-2" *ngIf="cargando">
     <div class="row-justify-content-center"  >
   
    <div class="row" >
         
-     <div class="col-sm-3" style="padding-top: 30px;">
-        <CDBCard style="padding-top: 10px; float: left;" >
+     <div class="col-sm-4 pt-2">
+        <CDBCard style="padding-top: 5px; float: left;" >
          
-          <div class="mx-auto" style="padding-top: 100px;">
-            <img style="margin-top: -5rem" width="130px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ7ntUU7AzmOxa5HB8zS83sa-JFHEfZJAoI2A&usqp=CAU">
-            
-           
+          <div class="mx-auto" style="padding-top: 90px;">
+            <img style="margin-top: -5rem" width="130px" src="../../assets/img/perfil.png">
           </div>
           <CDBCardBody class="d-flex flex-column align-items-center mb-4" *ngIf="usuario">
               <CDBCardTitle>{{usuario.nombre}} {{usuario.apellido}}</CDBCardTitle>
@@ -19,15 +17,25 @@
               <CDBCardText>{{usuario.telefono}}</CDBCardText>
               <CDBCardText>{{usuario.fechanacimiento}}</CDBCardText>
               <CDBCardText class="text-muted">{{usuario.direccion}}</CDBCardText>
-              <div class="mt-3">
-                  
-                  <CDBBtn class="ml-3" size="small" color="warning" (click)="mostrar=true"> Enviar Mensaje </CDBBtn>
+              <br>
+              <div class="card  border-warning" style="max-width: 18rem;">
+                <div class="card-header bg-transparent  border-warning" style="color: black; text-align: center;">Habilidades</div>
+                <div class="card-body border-warning" *ngFor="let habilidad of habilidades">
+                  <p class="card-text border-warning"><li>{{habilidad}}</li></p>
+                </div>
+                <div class="card-footer bg-transparent border-warning">
+                  <div class="">
+                    <CDBBtn class="ml-3" size="small" color="warning" (click)="mostrar=true"> Enviar Mensaje </CDBBtn>
+                </div>
+                </div>
               </div>
+            
+           
           </CDBCardBody>
       </CDBCard>
       </div>  
      
-      <div class="col-sm-9">
+      <div class="col-sm-8 pt-5">
         
           <CDBCard  [border]=true >
             <div class="container-fluid">
@@ -44,11 +52,11 @@
               <mat-card-title></mat-card-title>
               
                 <div style="float: left;">{{usuario.nombre}}  {{usuario.apellido}}</div>
-                <div style="float: right;"><button (click)="mostrar=false">X</button></div>
+                <div style="float: right;"><button (click)="mostrar=false"  style="background-color: rgb(179, 179, 29);">X</button></div>
              
             </div>
             <div class="card-body">
-             <div id="contenedorMensajes" class="contenedorDeMensajes h-100">
+             <div id="contenedorMensajes" class="contenedorDeMensajes h-100 container-fluid">
                 <p *ngFor=" let mensaje of mensajes" class="mensaje p-2"
                 [ngClass]="(usuarioActual.id==mensaje.emisor)? 'enviado': 'recibido'"
                 >
@@ -58,7 +66,7 @@
              </div>
             </div>
             <form class="card-footer text-muted input-group" (ngSubmit)="enviarMensaje()">
-                <input type="text" class="form-control" placeholder="Ingrese su mensaje" [(ngModel)] ="nuevoMensaje" [ngModelOptions]="{standalone: true}">
+                <input type="text" class="form-control container-fluid" placeholder="Ingrese su mensaje" [(ngModel)] ="nuevoMensaje" [ngModelOptions]="{standalone: true}">
                 <div class="input-group-append">
                     <span class="input-group-text" id="basic-addon2">
                         <button mat-icon-button type="submit">

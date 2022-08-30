@@ -1,5 +1,7 @@
 .container {
-    padding: 2%;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -14,15 +16,19 @@
     align-items: center;
     text-align: center;
     box-shadow: -1px 2px 14px 9px rgba(36,7,14,0.4);
-    background-color: steelblue;
+    background-color: #F6ED7C;   
     border-radius: 10px;
     padding: 2%;
+    width: 100%;
+    height: 100%;
+    
   
 }
 
 .mat-card {
     border-radius: 5px;  
-    background-color: cadetblue;
+    border: solid #FDB10B;
+    background-color: #F2CC79;
     
 }
 
@@ -30,7 +36,7 @@
 .titulo {
     font-family: 'Times New Roman', Times, serif;
     font-size: xx-large;
-    color: bisque;
+    color: black;
     font-style: oblique;
     padding-bottom: 20px
 }
@@ -38,7 +44,7 @@
 #subtitulo {
      
     font-size: large;
-    color: bisque;
+    color: black;
     font-family: 'Times New Roman', Times, serif;
 }
 
@@ -52,13 +58,15 @@
 
 .subir-video {
     font-size: large;
-    color: bisque;
+    color: black;
     font-family: 'Times New Roman', Times, serif;
     justify-content: center;
     align-items: center;
     text-align: center;
     box-shadow: -1px 2px 14px 9px rgba(36,7,14,0.4);
-    background-color: steelblue;
+    background-color: #F6ED7C;
     border-radius: 10px;
-    padding: 2%;
+    padding: 5%;
+    width: 100%;
+    height: 100%;
 }

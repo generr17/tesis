@@ -1,10 +1,10 @@
-
-<div class="container " >
-  <div class="row justify-content-center" >
+<app-cargando *ngIf="!load"></app-cargando>
+<div class="container" *ngIf="load">
+  <div class="row justify-content-center pt-5" >
    <div class="col-sm-6" id="equipos" >
     <div class="titulo"><b>Equipos</b></div> 
-   <div class="row"  >
-     <div class="col-sm-6">
+   <div class="row container-fluid">
+     <div class="col-sm-6 container-fluid">
       <div id="subtitulo"> <b> SERIE A</b></div>
         <div class="row pt-2" *ngFor="let equipo of equiposSA">
           <div class="col" >
@@ -15,16 +15,12 @@
                 {{equipo.direccion}}
                 {{equipo.serie}}
               </mat-card-content>
-              <mat-card-actions>
-                <button mat-button>LIKE</button>
-                <button mat-button>SHARE</button>
-              </mat-card-actions>
             </mat-card>
           </div>
         </div>
      </div>
     
-     <div class="col-sm-6" >
+     <div class="col-sm-6 container-fluid">
       <div id="subtitulo"> <b> SERIE B </b></div>
       <div class="row pt-2" *ngFor="let equipo of equiposSB">
         <div class="col">
@@ -35,10 +31,7 @@
               {{equipo.direccion}}
     
             </mat-card-content>
-            <mat-card-actions>
-              <button mat-button>LIKE</button>
-              <button mat-button>SHARE</button>
-            </mat-card-actions>
+            
           </mat-card>
         </div>
       </div>
@@ -46,12 +39,12 @@
     
    </div>
    </div> 
-   <div class="col-sm-6">
+   <div class="col-sm-6 ">
   
     <div class="row">
      
       <div class="col">
-        <div class="subir-video">
+        <div class="subir-video container-fluid">
           <h1>Subir video</h1>
          <form class="formI"
          name="form"
@@ -60,7 +53,7 @@
          novalidate>
           <div  class="form-group">
             
-            <input type="file" name="video" ng2FileSelect [uploader]="uploader" accept="video/mp4"
+            <input type="file" name="video" class="form-control form-control-lg" ng2FileSelect [uploader]="uploader" accept="video/mp4"
             [(ngModel)]="form.video"
             #video="ngModel"
             required
@@ -72,7 +65,39 @@
              Debe seleccionar un video.
             </div>
           </div>
-          
+          <div class="row">
+           <div class="col">
+            <mat-form-field appearance="fill" > 
+              <mat-label>Titulo</mat-label>
+              <input matInput  
+              type="text"
+              class="form-control"
+              name="titulo"
+              onKeypress="if ((event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122) && event.keyCode != 32) event.returnValue = false;"
+              [(ngModel)]="form.titulo"
+              required
+              maxlength="30"
+              minlength="10"
+              #titulo="ngModel"
+              >  
+          </mat-form-field>
+           </div>
+           <div class="col">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Descripción</mat-label>
+              <textarea matInput placeholder="Digite una descripcion de su video."
+              class="form-control"
+              name="descripcion"
+              [(ngModel)]="form.descripcion"
+              onKeypress="if ((event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122)  && event.keyCode != 32) event.returnValue = false;"
+              maxlength="50"
+              minlength="15"
+              required
+              #descripcion="ngModel"
+              ></textarea>
+            </mat-form-field>
+           </div>
+          </div>
           <div class="row">
             <div class="col">
               <div class="form-group">
@@ -119,7 +144,7 @@
               </div>
             </div>
           </div>
-          <button mat-raised-button color="primary"  *ngIf="!pago" type="button" (click)="abrirDialogoPago()" [disabled]="!uploader.getNotUploadedItems().length || !form.equipoId">
+          <button mat-raised-button color="primary"  *ngIf="!pago" type="button" (click)="abrirDialogoPago()" [disabled]="!uploader.getNotUploadedItems().length || !form.equipoId || !form.titulo || !form.descripcion">
             Subir
           </button>
           <button mat-raised-button color="accent" *ngIf="pago"  type="button" (click)="uploader.uploadAll()"  [disabled]="!uploader.getNotUploadedItems().length || !pago">

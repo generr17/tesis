@@ -2,7 +2,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    
+    background: transparent;
+    background-color: transparent;
     width: 600px;
     
 }
@@ -19,20 +20,22 @@
   width: 70%;
 }
 .titulo {
-  color: darkblue;
+  color:#474301;
   font-size: x-large;
   padding-top: 3%;
-  background-color: lightblue;
+  background-color: #E2B202;
   
 }
 
 .row {
   padding-top: 3%;
  padding-bottom: 3%;
+ background: transparent;
+ background-color: transparent;
 }
 .icono {
   font-size: 45px;
   justify-content: center;
-  color: darkblue;
+  color: #474301;
 }
 

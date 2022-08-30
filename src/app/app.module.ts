@@ -48,6 +48,11 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { SuscripcionesComponent } from './suscripciones/suscripciones.component';
 import { PagoSuscripcionComponent } from './pago-suscripcion/pago-suscripcion.component';
 import { ChatComponent } from './chat/chat.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { CargandoComponent } from './cargando/cargando.component';
+import { MisVideosComponent } from './mis-videos/mis-videos.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +73,9 @@ import { ChatComponent } from './chat/chat.component';
     HabilidadesComponent,
     SuscripcionesComponent,
     PagoSuscripcionComponent,
-    ChatComponent
+    ChatComponent,
+    CargandoComponent,
+    MisVideosComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +106,9 @@ import { ChatComponent } from './chat/chat.component';
     MatSnackBarModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatBadgeModule,
+    MatProgressSpinnerModule
     
   ],
   providers: [authInterceptorProviders],

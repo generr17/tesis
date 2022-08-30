@@ -4,21 +4,23 @@
       <img src="../assets/img/logo.png" class="logo">
     <button mat-button class="menuH" *ngIf="usuarioActual.rolusuario === 'admin'" routerLink="/equipo">Crear Equipo</button>
     <button mat-button class="menuH" *ngIf="usuarioActual.rolusuario === 'admin'" routerLink="/directivo">Crear Usuario</button>
-         
- </div>
-
-  <div class="derecha">
+    <button mat-button class="menuH" *ngIf="usuarioActual.rolusuario === 'usuario'" routerLink="/usuario">Inicio</button>
+    <button mat-button class="menuH" *ngIf="usuarioActual.rolusuario === 'usuario'" routerLink="/mis-videos">Mis videos</button>
+   
+  </div>
+  <button mat-button class="menuH" *ngIf="usuarioActual.rolusuario === 'directivo'" routerLink="/videos">Videos</button>
+  <div class="derecha" >
     
-      <button class="btnMenu"  mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-          <mat-icon  class="icono">account_box</mat-icon>
+      <button class="btnMenu"  mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" >
+          <mat-icon  class="icono" [matBadge]="mensajesNuevo" [matBadgeHidden]="hidden" matBadgePosition="before" matBadgeColor="accent">account_box</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="abrirInformacionUsuario()">
             <mat-icon>assignment_ind</mat-icon>
             <span>Mi cuenta</span>
           </button>
-          <button mat-menu-item >
-              <mat-icon> message</mat-icon>
+          <button mat-menu-item routerLink="/mensaje">
+              <mat-icon  [matBadgeHidden]="hidden" [matBadge]="mensajesNuevo"> message</mat-icon>
             <span>Mensajes</span>
           </button>
           <button mat-menu-item (click)="cerrarsesion()">

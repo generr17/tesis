@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FileUploader } from 'ng2-file-upload';
+import { getMatIconFailedToSanitizeUrlError } from '@angular/material/icon';
+import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 
 
  const API_URL = 'http://localhost:3000/api/video/';
@@ -15,11 +17,13 @@ export class VideoService {
  public URL = 'http://localhost:3000/api/video/subir';
  public URLS = 'http://localhost:3000/api/video/subirImagen';
   constructor(private http: HttpClient) { }
-  guardarVideo(video: any, imagen: any, usuario:any, equipos:any): Observable<any> {
+  guardarVideo(video: any, imagen: any, usuario:any, equipos:any, titulo: string, descripcion: string): Observable<any> {
 
     return this.http.post(API_URL+'guardar', {
       url:video,
       imagen: imagen,
+      titulo: titulo,
+      descripcion: descripcion,
       usuarioId:usuario,
       equipos: equipos
     }, httpOptions);
@@ -28,6 +32,19 @@ export class VideoService {
  obtenerVideos(equipoId: number): Observable<any> {
     return this.http.get(API_URL+'obtenerVideos/' +equipoId, { responseType: 'text' });
     
+ }
+
+ listarVideos(usuarioId: number): Observable<any> {
+  return this.http.get(API_URL+'listarVideos/' +usuarioId, { responseType: 'text' });
+  
+}
+
+ buscarVideos(equipoId: number, texto:string): Observable<any> {
+  return this.http.get(API_URL + 'buscarVideos/'+equipoId+ '/' + texto, { responseType: 'text'});
+ }
+
+ buscarVideosDeUsuario(usuarioId: number, texto:string): Observable<any> {
+  return this.http.get(API_URL + 'buscarVideosUsuario/'+usuarioId+ '/' + texto, { responseType: 'text'});
  }
 
  obtenerSuscripciones(): Observable<any> {

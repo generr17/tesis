@@ -27,6 +27,7 @@
                         type="text"
                         class="form-control"
                         name="nombreusuario"
+                        onKeypress="if ((event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122)) event.returnValue = false;"
                         [(ngModel)]="form.nombreusuario"
                         required
                         maxlength="25"
@@ -46,6 +47,7 @@
                         type="text"
                         class="form-control"
                         name="apellidousuario"
+                        onKeypress="if ((event.keyCode < 65 || event.keyCode > 90) && (event.keyCode < 97 || event.keyCode > 122)) event.returnValue = false;"
                         [(ngModel)]="form.apellidousuario"
                         required
                         maxlength="25"
@@ -83,9 +85,11 @@
                             type="text"
                             class="form-control"
                             name="telefono"
+                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
                             [(ngModel)]="form.telefono"
                             required
                             maxlength="10"
+                            minlength="5"
                             #telefono="ngModel"
                             >  
                         </mat-form-field>
@@ -170,7 +174,7 @@
             </div>
             
             <div class="form-group">
-                <button mat-raised-button color="primary">Editar</button>
+                <button mat-raised-button style="background-color: #E7AD31;">Editar</button>
             </div>
             
             <div class="alert alert-warning" *ngIf="f.submitted && esEditadoFallido ">

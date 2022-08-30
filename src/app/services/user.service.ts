@@ -46,13 +46,16 @@ export class UserService {
   }
 
   obtenerHabilidadesPorUsuario(id: number): Observable<any> {
-    return this.http.get(API_URL + 'obtenerHabilidadesUsuario/' + id);
+    return this.http.get(API_URL + 'obtenerHabilidadesUsuario/' + id, {responseType: 'text'});
   }
 
   contarHabilidades(id: number): Observable<any> {
     return this.http.get(API_URL + 'contarHabilidadesUsuario/' + id, {responseType: 'text'});
   }
 
+  contarMensajesNuevos(id:number): Observable<any>{
+    return this.http.get('http://localhost:3000/api/contarNuevosMensajes/' + id, {responseType: 'text'});
+  }
   guardarHabilidades(usuario:any, habilidades:any): Observable<any> {
 
     return this.http.post(API_URL+'guardarHabilidades', {

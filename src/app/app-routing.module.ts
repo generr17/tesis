@@ -11,8 +11,9 @@ import { EquipoComponent } from './equipo/equipo.component';
 import { VideoComponent } from './video/video.component';
 import { ListadoVideosComponent } from './listado-videos/listado-videos.component';
 import { HabilidadesComponent } from './habilidades/habilidades.component';
-
+import { MisVideosComponent } from './mis-videos/mis-videos.component';
 import { ChatComponent } from './chat/chat.component';
+
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'videos', component: ListadoVideosComponent},
   {path: 'habilidades', component: HabilidadesComponent},
   { path: 'mensaje', component: ChatComponent},
+  {path: 'mis-videos', component: MisVideosComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 

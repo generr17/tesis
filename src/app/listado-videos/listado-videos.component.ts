@@ -17,6 +17,7 @@ export class ListadoVideosComponent implements OnInit {
   constructor(private videoService: VideoService,private tokenStorageService: TokenStorageService, public dialog: MatDialog, private usuarioService: UserService, private router: Router) { }
   videos : Video[]=[];
   usuarioActual: any;
+  value: any;
   mensaje = '';
   url: any;
   pago:false;
@@ -31,14 +32,15 @@ export class ListadoVideosComponent implements OnInit {
   cargarVideos (){
     this.videoService.obtenerVideos(this.usuarioActual.equipoId).subscribe(
       (data) => {
+        this.videos = [];
        let videoDat = JSON.parse(data);
      
       for(let index=0; index<videoDat.length; index++){
         let date= new Date(videoDat[index].createdAt);
         let dt= new Date();
-         
-          this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date))
+          this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion))
       }
+      
     
       },
       err => {
@@ -90,7 +92,32 @@ export class ListadoVideosComponent implements OnInit {
        }
     );
   }
+  buscarVideos(){
+    if( this.value){
+      this.videoService.buscarVideos(this.usuarioActual.equipoId, this.value).subscribe(
+        (data) => {
+          this.videos = [];
+         let videoDat = JSON.parse(data);
+       
+        for(let index=0; index<videoDat.length; index++){
+          let date= new Date(videoDat[index].createdAt);
+          let dt= new Date();
+            this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion))
+        }
+        
+      
+        },
+        err => {
+          this.mensaje = err.error.message;
+        }
+      );
+    }else {
+      this.cargarVideos();
+    }
+    
+  }
 }
+
 
 
 class Video {
@@ -98,12 +125,17 @@ class Video {
   usuario: string;
   url: string;
   imagen:string;
+  titulo: string;
+  descripcion: string;
   fecha: Date;
-  constructor (id:number ,usuario:string, url: string, imagen:string, fecha: Date){
+
+  constructor (id:number ,usuario:string, url: string, imagen:string, fecha: Date, titulo: string, descripcion: string){
     this.id= id;
     this.usuario= usuario;
     this.url= url;
     this.imagen=imagen;
     this.fecha= fecha;
+    this.titulo = titulo;
+    this.descripcion = descripcion;
   }
 }

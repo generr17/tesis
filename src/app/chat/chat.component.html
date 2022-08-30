@@ -16,15 +16,21 @@
 
         </div>
         <div class="col-md-8" style="height: 550px;">
+        
           
           <div class="card-body contenedorDeMensajes h-100" id="contenedorMensajes" *ngIf="mensajes.length>0" >
            
-            <h1 class="card-title"><b>{{nombreUsuario}}</b></h1>
-            <mat-divider></mat-divider>
-           
-            <div *ngFor="let sms of mensajes" > 
+            
+              <h1 class="card-title" style="position: absolute; width: 100%; padding-bottom: 10px;"><b>{{nombreUsuario}}
+              </b>
+              <mat-divider style="width: 100%;"></mat-divider>
+               
+              </h1>
+              <br><br>
+            
+            <div *ngFor="let sms of mensajes"  class="mensaje"> 
               
-                <div class="row pt-2" >
+                <div class="row pt-2"  >
                   <div class="col" >
                     <span class="mensaje" [ngClass]="(usuarioActual.id == sms.usuarioId)? 'enviado': 'recibido'">
                       
@@ -36,7 +42,6 @@
                  
                 </div>
             </div>
-         
           </div>
           <div class="card-body imagen" *ngIf="mensajes.length == 0"  style=" align-items: center;">
             

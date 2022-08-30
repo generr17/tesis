@@ -20,6 +20,7 @@ export class MetodoDePagoComponent implements OnInit {
     descripcion: "Subir video para equipos",
     precio: 0,
   }
+  pago=false;
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
   ngOnInit(): void {
    
@@ -48,6 +49,7 @@ export class MetodoDePagoComponent implements OnInit {
         console.log("orden: ", order.status);
         if(order.status){
           this.data.pago= true;
+          this.pago =true;
         }
       },
       onError: (err:any) => {

@@ -17,6 +17,7 @@ export class VideoComponent implements OnInit {
   public url: string;
   public usr: number;
   public usuario: any={};
+  habilidades: string[] =[];
   cargando =  false;
   mostrar=false;
   user: any;
@@ -25,19 +26,6 @@ export class VideoComponent implements OnInit {
   usuarioActual: any= {};
   mensaje: string = "";
   mensajes: any = [
-    {emisor: "id",
-      texto: "Hola como estas",
-      receptor: "id"
-     },
-     {emisor: "id",
-     texto: "Hola "
-    },
-    {emisor: "id",
-    texto: "como estas"
-   }
-   , {emisor: "id",
-   texto: "Bien"
-   }
   ];
   constructor(private videoService: VideoService, private activateRoute: ActivatedRoute, private usuarioService: UserService, private token: TokenStorageService, private userService: UserService) { }
 
@@ -54,6 +42,21 @@ export class VideoComponent implements OnInit {
 
   }
   
+  cargarHabilidades(){
+    this.userService.obtenerHabilidadesPorUsuario(this.usr).subscribe(
+      data => {
+       let dat = JSON.parse(data);
+       for( let i = 0; i< dat.length; i++){
+            this.habilidades.push(dat[i].nombre);
+            
+       }
+       console.log(dat);
+      },
+      err => {
+        this.mensajeE = err.error.message;
+       
+      })
+  } 
   
   CargarDatos(id:number){
    console.log(id);
@@ -80,8 +83,9 @@ export class VideoComponent implements OnInit {
       dat => {
         this.url = "http://localhost:3000/api/video/reproducir/"+ this.nombre;
         this.usuario = new Usuario(dat.nombreusuario, dat.apellidousuario, dat.telefono, dat.fechanacimiento, dat.direccion, dat.genero, dat.email,dat.suscrito);
+        this.cargarHabilidades();
         this.cargando= true;
-
+             
       },
       err => {
         this.mensaje = err.error.message;
@@ -113,7 +117,7 @@ export class VideoComponent implements OnInit {
 
    scrollTheLastElementbyClassName(){
       let elements= document.getElementsByClassName('mensaje');
-      let ultimoElemento: any = elements[elements.length - 1];
+      let ultimoElemento: any = elements[elements.length ];
       let toppos = ultimoElemento;
       //@ts-ignore
       document.getElementById('contenedorMensajes')?.scrollTop = toppos;
