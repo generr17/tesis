@@ -16,7 +16,35 @@
  #cd {
   color: black;
   text-align: justify;
-  background-color: #E2B202;
+  background-color: #FFF699;
  // background:  #
   
  }
+
+ .btn:hover,
+ .btn:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  -webkit-transform: translateY(-0.25em);
+          transform: translateY(-0.25em);
+}
+
+.btn {
+  --color: #ffa260;
+  --hover: #e5ff60;
+}
+
+.btn {
+  color: var(--color);
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+.btn:hover, button:focus {
+  border-color: var(--hover);
+  color: #FFF699;
+}
+.btn {
+  background: none;
+  border: 1px solid;
+  font: inherit;
+  line-height: 1;
+}

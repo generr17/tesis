@@ -39,6 +39,14 @@ export class VideoService {
   
 }
 
+listarVideosNuevos(usuarioId: number): Observable<any> {
+  return this.http.get(API_URL+'videosNoVistos/' +usuarioId, { responseType: 'text' });
+}
+
+listarVideosVistos(usuarioId: number): Observable<any> {
+  return this.http.get(API_URL+'videosVistos/' +usuarioId, { responseType: 'text' });
+}
+
  buscarVideos(equipoId: number, texto:string): Observable<any> {
   return this.http.get(API_URL + 'buscarVideos/'+equipoId+ '/' + texto, { responseType: 'text'});
  }
@@ -47,6 +55,18 @@ export class VideoService {
   return this.http.get(API_URL + 'buscarVideosUsuario/'+usuarioId+ '/' + texto, { responseType: 'text'});
  }
 
+ buscarVideosVistosDeUsuario(usuarioId: number, texto:string): Observable<any> {
+  return this.http.get(API_URL + 'buscarVideosUsuario/'+usuarioId+ '/' + texto, { responseType: 'text'});
+ }
+
+ VideosVistosDeUsuario(usuarioId: number, texto:string): Observable<any> {
+  return this.http.get(API_URL + 'buscarVideosVistos/'+usuarioId+ '/' + texto, { responseType: 'text'});
+ }
+
+ VideosNuevosDeUsuario(usuarioId: number, texto:string): Observable<any> {
+  return this.http.get(API_URL + 'buscarVideosNuevos/'+usuarioId+ '/' + texto, { responseType: 'text'});
+ }
+ //
  obtenerSuscripciones(): Observable<any> {
   return this.http.get('http://localhost:3000/obtenerSuscripciones', { responseType: 'text' });
  }

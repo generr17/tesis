@@ -10,6 +10,7 @@ import { Serie } from '../modelos/serie.model';
 import { FileUploader } from 'ng2-file-upload';
 import { MetodoDePagoComponent, Transaction } from '../metodo-de-pago/metodo-de-pago.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
@@ -36,6 +37,7 @@ export class UsuarioComponent implements OnInit {
    pago=false;  
    transactions: Transaction[]=[];
    tipo=1;
+   habilidades: any[] = [];
   constructor(private userService: UserService, private videoService: VideoService,private tokenStorageService: TokenStorageService, public dialog: MatDialog, private equipoService: EquipoService, private _snackBar: MatSnackBar) { }
   public uploader: FileUploader = new FileUploader({
     url: this.videoService.URL,
@@ -52,13 +54,12 @@ export class UsuarioComponent implements OnInit {
     const dialogRef = this.dialog.open(PerfilComponent);
     
   }
-
   
   ngOnInit(): void {
     
     this.obtenerListaSeries();
     this.obtenerListaEquipo();
-   
+    this.cargarHabilidades();
     this.subirVideo();
   
   }
@@ -76,7 +77,7 @@ export class UsuarioComponent implements OnInit {
              this.equipos.push(new Equipo(Number(equipoDat[i].id),equipoDat[i].nombre,equipoDat[i].telefono, equipoDat[i].direccion, equipoDat[i].serieId, Number(equipoDat[i].precio))); 
              
           }
-          this.load =true;
+          
         },
         err => {
           this.mensaje = err.error.message;
@@ -101,11 +102,11 @@ export class UsuarioComponent implements OnInit {
          this.series.push(new Serie(Number(seriesA[i].id),seriesA[i].nombre )); 
        }
       
-      this.cargando= false;
+    
       },
       err => {
         this.mensaje = err.error.message;
-        this.cargando= false;
+       
         this.openSnackBar(this.mensaje);
       }
     );
@@ -131,6 +132,27 @@ export class UsuarioComponent implements OnInit {
    
     
  }
+
+ cargarHabilidades(){
+  this.userService.obtenerHabilidadesPorUsuario(this.tokenStorageService.obtenerUsuario().id).subscribe(
+    (data) => {
+     let listHabilidades = JSON.parse(data);
+     for (let i=0; i < listHabilidades.length; i++){
+      this.habilidades.push({nombre: listHabilidades[i].nombre})
+      }
+      this.load =true;
+    },
+    err => {
+      this.mensaje = err.error.message;
+      this.openSnackBar(this.mensaje);
+      this.load = false;
+    }
+  );
+
+
+
+
+}
 
  subirVideo(){
    

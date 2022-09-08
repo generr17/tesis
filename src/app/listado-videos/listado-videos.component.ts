@@ -21,11 +21,13 @@ export class ListadoVideosComponent implements OnInit {
   mensaje = '';
   url: any;
   pago:false;
+  visto: number;
+  habilidades: any[]=[];
   ngOnInit(): void {
     this.usuarioActual= this.tokenStorageService.obtenerUsuario();
     console.log(this.usuarioActual);
     this.cargarVideos();
-    
+    this.obtenerListaHabilidades();
    
   }
 
@@ -52,6 +54,47 @@ export class ListadoVideosComponent implements OnInit {
   
   }
 
+  cargarVideosNuevos (){
+    this.videoService.listarVideosNuevos(this.usuarioActual.equipoId).subscribe(
+      (data) => {
+        this.videos = [];
+       let videoDat = JSON.parse(data);
+       this.visto = 0;
+      for(let index=0; index<videoDat.length; index++){
+        let date= new Date(videoDat[index].createdAt);
+        let dt= new Date();
+          this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion))
+      }
+      },
+      err => {
+        this.mensaje = err.error.message;
+      }
+    );
+
+    
+  
+  }
+
+  cargarVideosVistos (){
+    this.videoService.listarVideosVistos(this.usuarioActual.equipoId).subscribe(
+      (data) => {
+        this.videos = [];
+       let videoDat = JSON.parse(data);
+       this.visto = 1;
+      for(let index=0; index<videoDat.length; index++){
+        let date= new Date(videoDat[index].createdAt);
+        let dt= new Date();
+          this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion))
+      }
+      },
+      err => {
+        this.mensaje = err.error.message;
+      }
+    );
+
+    
+  
+  }
 
   reproducirVideo(video: string, usuario: number){
     console.log(this.usuarioActual.suscrito);
@@ -61,7 +104,7 @@ export class ListadoVideosComponent implements OnInit {
       this.router.navigate(['video', video, usuario]);
     }else  if(this.usuarioActual.suscrito === 0){
       const dialogRef = this.dialog.open(SuscripcionesComponent, {
-        width: '500px',
+        width: '570px',
         //revisar
         data: {pago: this.pago},
       });
@@ -94,28 +137,95 @@ export class ListadoVideosComponent implements OnInit {
   }
   buscarVideos(){
     if( this.value){
-      this.videoService.buscarVideos(this.usuarioActual.equipoId, this.value).subscribe(
-        (data) => {
-          this.videos = [];
-         let videoDat = JSON.parse(data);
-       
-        for(let index=0; index<videoDat.length; index++){
-          let date= new Date(videoDat[index].createdAt);
-          let dt= new Date();
-            this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion))
-        }
+      if( this.visto === 0){
+        this.videoService.VideosNuevosDeUsuario(this.usuarioActual.equipoId, this.value).subscribe(
+          (data) => {
+            this.videos = [];
+           let videoDat = JSON.parse(data);
+         
+          for(let index=0; index<videoDat.length; index++){
+            let date= new Date(videoDat[index].createdAt);
+            let dt= new Date();
+              this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion))
+          }
+          
         
-      
-        },
-        err => {
-          this.mensaje = err.error.message;
-        }
-      );
+          },
+          err => {
+            this.mensaje = err.error.message;
+          }
+        );
+      }else if (this.visto === 2) {
+        this.videoService.VideosVistosDeUsuario(this.usuarioActual.equipoId, this.value).subscribe(
+          (data) => {
+            this.videos = [];
+           let videoDat = JSON.parse(data);
+         
+          for(let index=0; index<videoDat.length; index++){
+            let date= new Date(videoDat[index].createdAt);
+            let dt= new Date();
+              this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion))
+          }
+          
+        
+          },
+          err => {
+            this.mensaje = err.error.message;
+          }
+        );
+      }else {
+        this.videoService.buscarVideos(this.usuarioActual.equipoId, this.value).subscribe(
+          (data) => {
+            this.videos = [];
+           let videoDat = JSON.parse(data);
+         
+          for(let index=0; index<videoDat.length; index++){
+            let date= new Date(videoDat[index].createdAt);
+            let dt= new Date();
+              this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion))
+          }
+          
+        
+          },
+          err => {
+            this.mensaje = err.error.message;
+          }
+        );
+      }
+     
     }else {
-      this.cargarVideos();
+      if(this.visto === 0) {
+        this.cargarVideosNuevos();
+      } else if(this.visto === 1){
+        this.cargarVideosVistos
+      }else {
+        this.cargarVideos();
+      }
+      
     }
     
   }
+
+  obtenerListaHabilidades(){
+    
+    this.usuarioService.obtenerHabilidadesT().subscribe(
+      (data) => {
+       let habilidadesA = JSON.parse(data);
+      
+       for (let i=0; i < habilidadesA.length; i++){
+
+         this.habilidades.push({id: habilidadesA[i].id, nombre: habilidadesA[i].nombre}); 
+       }
+      
+     
+      },
+      err => {
+        this.mensaje = err.error.message;
+        
+      }
+    );
+   
+ };
 }
 
 

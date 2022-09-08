@@ -1,3 +1,4 @@
+
 <div class="body">
 <div class="container container-fluid">
   <div class="row justify-content-center pb-3 pt-3">
@@ -8,6 +9,25 @@
         <mat-icon>search</mat-icon>
       </button>
     </mat-form-field>
+    <div class="col-sm-12">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons" >
+        <label class="btn ">
+          <input type="radio" name="options" id="option2" autocomplete="off"> Todo
+        </label>
+        <label class="btn border-warning">
+          <input type="radio" name="options" id="option2" autocomplete="off"> Nuevos
+        </label>
+        <label class="btn border-warning">
+          <input type="radio" name="options" id="option2" autocomplete="off"> Vistos
+        </label>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngFor="let habilidad of habilidades">
+       
+        <label class="btn border-warning">
+          <input type="radio" name="options" id="option2" autocomplete="off"> {{habilidad.nombre}}
+        </label>
+      </div>
+      </div>
+    </div>
     
   </div>
     

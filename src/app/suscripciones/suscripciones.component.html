@@ -1,16 +1,16 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 p-3" *ngFor="let suscripcion of suscripciones" >
+<div class="container container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-4 p-3 justify-content-center" *ngFor="let suscripcion of suscripciones" >
             <div class="card text-center">
-                <div class="card-header" >{{suscripcion.nombre}}</div>
-                <div class="card-body">
+                <div class="card-header" style="border: 1px #E7AD31;">{{suscripcion.nombre}}</div>
+                <div class="card-body justify-content-center">
                   <h5 class="card-title">{{suscripcion.descripcion}}</h5>
                   <p class="card-text">{{suscripcion.precio}}</p>
-                  <button mat-raised-button color="primary"  *ngIf="!pago" type="button" (click)="abrirDialogoPago(suscripcion)" >
-                    Subir
+                  <button mat-raised-button style="background-color:#E7AD31;"  *ngIf="!pago" type="button" (click)="abrirDialogoPago(suscripcion)" >
+                    Suscribirse
                   </button>
                 </div>
-                <div class="card-footer text-muted">{{suscripcion.nota}}</div>
+                <div class="card-footer text-muted" style="border: 1px #E7AD31;">{{suscripcion.nota}}</div>
               </div>
         </div>
     </div>
