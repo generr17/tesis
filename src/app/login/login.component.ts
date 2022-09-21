@@ -42,7 +42,16 @@ export class LoginComponent implements OnInit {
         this.estaLogeado = true;
         this.rol = this.tokenStorage.obtenerUsuario().rolusuario;
         let msg="Logeado como: " + this.rol;
-        
+        if(this.rol == "usuario"){
+           if(this.tokenStorage.obtenerUsuario().activo){
+            this.openSnackBar(msg);
+            this.contarHabilidades();
+
+           }else{
+            this.tokenStorage.cerrarsesion();
+            window.location.pathname='login';
+           }
+        }
         this.openSnackBar(msg);
         this.contarHabilidades();
        
