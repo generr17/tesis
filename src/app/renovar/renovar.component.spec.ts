@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SuscripcionesComponent } from './suscripciones.component';
+import { RenovarComponent } from './renovar.component';
 
-describe('SuscripcionesComponent', () => {
-  let component: SuscripcionesComponent;
-  let fixture: ComponentFixture<SuscripcionesComponent>;
+describe('RenovarComponent', () => {
+  let component: RenovarComponent;
+  let fixture: ComponentFixture<RenovarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SuscripcionesComponent ]
+      declarations: [ RenovarComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SuscripcionesComponent);
+    fixture = TestBed.createComponent(RenovarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

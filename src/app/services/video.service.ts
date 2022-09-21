@@ -51,6 +51,17 @@ listarVideosVistos(usuarioId: number): Observable<any> {
   return this.http.get(API_URL + 'buscarVideos/'+equipoId+ '/' + texto, { responseType: 'text'});
  }
 
+ listarVideosPorFiltro(equipoId: number, texto:string): Observable<any> {
+  return this.http.get(API_URL + 'buscarVideosPorTipo/'+equipoId+ '/' + texto, { responseType: 'text'});
+ }
+obtenerVideosNoVistos(equipoId: number): Observable<any> {
+  return this.http.get(API_URL + 'listarVideosNoVistos/'+equipoId, { responseType: 'text'});
+ }
+
+ obtenerVideosVistos(equipoId: number): Observable<any> {
+  return this.http.get(API_URL + 'listarVideosVistos/'+equipoId, { responseType: 'text'});
+ }
+
  buscarVideosDeUsuario(usuarioId: number, texto:string): Observable<any> {
   return this.http.get(API_URL + 'buscarVideosUsuario/'+usuarioId+ '/' + texto, { responseType: 'text'});
  }
@@ -74,5 +85,11 @@ listarVideosVistos(usuarioId: number): Observable<any> {
    return this.http.get(API_URL + "reproducir", video);
  }
   
+ aditarEstadoVideo(id: number, equipo: number): Observable<any> {
+  return this.http.put(API_URL + 'actualizarEstado', {
+     videoId: id,
+     equipoId: equipo
+  }, httpOptions);
+}
 
 }

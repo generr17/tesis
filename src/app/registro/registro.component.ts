@@ -15,7 +15,7 @@ export class RegistroComponent implements OnInit {
   esRegistroFallido = false;
   mensaje = '';
   generos = ['Femenimo', 'Masculino', 'Otro'];
-  
+  checked = false;
   constructor(private router: Router, private authServicio: AuthService, private _snackBar: MatSnackBar) { }
  valorSeleccionado:string = '';
 
@@ -24,7 +24,7 @@ export class RegistroComponent implements OnInit {
 
   registrar():void {
     console.log(this.form.genero);
-    
+    console.log();
     this.authServicio.registar(this.form).subscribe(
       data => {
         console.log(data);

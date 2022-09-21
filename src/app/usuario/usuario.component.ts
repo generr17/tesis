@@ -154,6 +154,7 @@ export class UsuarioComponent implements OnInit {
 
 }
 
+
  subirVideo(){
    
     this.uploader.onAfterAddingFile=(file: any) => {
@@ -193,14 +194,15 @@ export class UsuarioComponent implements OnInit {
         
            }
          }
-        
+         console.log(this.form.descripcion);
         this.videoService.guardarVideo(videoUrl,image, this.tokenStorageService.obtenerUsuario().id,this.seleccionados, this.form.titulo, this.form.descripcion).subscribe(
+        
           data => {
             console.log(data);
             this.esExitoso = true;
             this.esRegistroFallido = false;
             this.openSnackBar("Video subido exitosamente");
-            this.form.reset();
+            //this.form.reset();
             this.pago = false;
           },
           err => {
@@ -229,6 +231,8 @@ export class UsuarioComponent implements OnInit {
    console.log(equipos)
   const dialogRef = this.dialog.open(MetodoDePagoComponent, {
     width: '300px',
+    disableClose: true,
+      hasBackdrop: true,
     data: {equipos: equipos, pago: this.pago, tipo: this.tipo},
   });
   dialogRef.afterClosed().subscribe(result => {

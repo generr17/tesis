@@ -36,11 +36,12 @@ export class ListadoVideosComponent implements OnInit {
       (data) => {
         this.videos = [];
        let videoDat = JSON.parse(data);
-     
+     console.log(videoDat);
       for(let index=0; index<videoDat.length; index++){
         let date= new Date(videoDat[index].createdAt);
         let dt= new Date();
-          this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion))
+        let usuario = videoDat[index].nombreusuario + " " + videoDat[index].apellidousuario;
+          this.videos.push(new Video(videoDat[index].videoId, usuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion, videoDat[index].id))
       }
       
     
@@ -55,15 +56,17 @@ export class ListadoVideosComponent implements OnInit {
   }
 
   cargarVideosNuevos (){
-    this.videoService.listarVideosNuevos(this.usuarioActual.equipoId).subscribe(
+    this.videoService.obtenerVideosNoVistos(this.usuarioActual.equipoId).subscribe(
       (data) => {
         this.videos = [];
        let videoDat = JSON.parse(data);
-       this.visto = 0;
+       console.log("videos nuevos: ", videoDat);
+       
       for(let index=0; index<videoDat.length; index++){
         let date= new Date(videoDat[index].createdAt);
         let dt= new Date();
-          this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion))
+        let usuario = videoDat[index].nombreusuario + " " + videoDat[index].apellidousuario;
+          this.videos.push(new Video(videoDat[index].videoId, usuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion, videoDat[index].id))
       }
       },
       err => {
@@ -76,7 +79,7 @@ export class ListadoVideosComponent implements OnInit {
   }
 
   cargarVideosVistos (){
-    this.videoService.listarVideosVistos(this.usuarioActual.equipoId).subscribe(
+    this.videoService.obtenerVideosVistos(this.usuarioActual.equipoId).subscribe(
       (data) => {
         this.videos = [];
        let videoDat = JSON.parse(data);
@@ -84,7 +87,8 @@ export class ListadoVideosComponent implements OnInit {
       for(let index=0; index<videoDat.length; index++){
         let date= new Date(videoDat[index].createdAt);
         let dt= new Date();
-          this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion))
+        let usuario = videoDat[index].nombreusuario + " " + videoDat[index].apellidousuario;
+          this.videos.push(new Video(videoDat[index].videoId, usuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion, videoDat[index].id))
       }
       },
       err => {
@@ -96,16 +100,17 @@ export class ListadoVideosComponent implements OnInit {
   
   }
 
-  reproducirVideo(video: string, usuario: number){
-    console.log(this.usuarioActual.suscrito);
-   
+  
+  reproducirVideo(video: string, usuario: number, idVideo: number){
+  
     if(this.usuarioActual.suscrito === 1){
-      var vid=[video, usuario];
-      this.router.navigate(['video', video, usuario]);
+      var vid=[video, usuario, idVideo];
+      this.router.navigate(['video', video, usuario, idVideo]);
     }else  if(this.usuarioActual.suscrito === 0){
       const dialogRef = this.dialog.open(SuscripcionesComponent, {
         width: '570px',
-        //revisar
+        disableClose: true,
+        hasBackdrop: true,
         data: {pago: this.pago},
       });
       dialogRef.afterClosed().subscribe(result => {
@@ -137,43 +142,7 @@ export class ListadoVideosComponent implements OnInit {
   }
   buscarVideos(){
     if( this.value){
-      if( this.visto === 0){
-        this.videoService.VideosNuevosDeUsuario(this.usuarioActual.equipoId, this.value).subscribe(
-          (data) => {
-            this.videos = [];
-           let videoDat = JSON.parse(data);
-         
-          for(let index=0; index<videoDat.length; index++){
-            let date= new Date(videoDat[index].createdAt);
-            let dt= new Date();
-              this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion))
-          }
-          
-        
-          },
-          err => {
-            this.mensaje = err.error.message;
-          }
-        );
-      }else if (this.visto === 2) {
-        this.videoService.VideosVistosDeUsuario(this.usuarioActual.equipoId, this.value).subscribe(
-          (data) => {
-            this.videos = [];
-           let videoDat = JSON.parse(data);
-         
-          for(let index=0; index<videoDat.length; index++){
-            let date= new Date(videoDat[index].createdAt);
-            let dt= new Date();
-              this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion))
-          }
-          
-        
-          },
-          err => {
-            this.mensaje = err.error.message;
-          }
-        );
-      }else {
+    
         this.videoService.buscarVideos(this.usuarioActual.equipoId, this.value).subscribe(
           (data) => {
             this.videos = [];
@@ -182,7 +151,8 @@ export class ListadoVideosComponent implements OnInit {
           for(let index=0; index<videoDat.length; index++){
             let date= new Date(videoDat[index].createdAt);
             let dt= new Date();
-              this.videos.push(new Video(videoDat[index].id, videoDat[index].nombreusuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion))
+            let usuario = videoDat[index].nombreusuario + " " + videoDat[index].apellidousuario;
+              this.videos.push(new Video(videoDat[index].videoId, usuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion,videoDat[index].id))
           }
           
         
@@ -191,20 +161,38 @@ export class ListadoVideosComponent implements OnInit {
             this.mensaje = err.error.message;
           }
         );
-      }
+    
      
     }else {
-      if(this.visto === 0) {
-        this.cargarVideosNuevos();
-      } else if(this.visto === 1){
-        this.cargarVideosVistos
-      }else {
+     
         this.cargarVideos();
-      }
+      
       
     }
     
   }
+
+ filtrarVideos(texto: string){
+  console.log(texto);
+  this.videoService.listarVideosPorFiltro(this.usuarioActual.equipoId, texto).subscribe(
+    (data) => {
+      this.videos = [];
+     let videoDat = JSON.parse(data);
+   
+    for(let index=0; index<videoDat.length; index++){
+      let date= new Date(videoDat[index].createdAt);
+      let dt= new Date();
+      let usuario = videoDat[index].nombreusuario + " " + videoDat[index].apellidousuario;
+        this.videos.push(new Video(videoDat[index].videoId, usuario, videoDat[index].url, videoDat[index].imagen, date, videoDat[index].titulo, videoDat[index].descripcion, videoDat[index].id))
+    }
+    
+  
+    },
+    err => {
+      this.mensaje = err.error.message;
+    }
+  );
+ }
 
   obtenerListaHabilidades(){
     
@@ -226,6 +214,8 @@ export class ListadoVideosComponent implements OnInit {
     );
    
  };
+
+ 
 }
 
 
@@ -238,8 +228,8 @@ class Video {
   titulo: string;
   descripcion: string;
   fecha: Date;
-
-  constructor (id:number ,usuario:string, url: string, imagen:string, fecha: Date, titulo: string, descripcion: string){
+  idUsuario: number;
+  constructor (id:number ,usuario:string, url: string, imagen:string, fecha: Date, titulo: string, descripcion: string, idUsuario: number){
     this.id= id;
     this.usuario= usuario;
     this.url= url;
@@ -247,5 +237,6 @@ class Video {
     this.fecha= fecha;
     this.titulo = titulo;
     this.descripcion = descripcion;
+    this.idUsuario = idUsuario ;
   }
 }

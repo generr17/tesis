@@ -52,6 +52,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { CargandoComponent } from './cargando/cargando.component';
 import { MisVideosComponent } from './mis-videos/mis-videos.component';
+import { PoliticaUsoComponent } from './politica-uso/politica-uso.component';
+import { RenovarComponent } from './renovar/renovar.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,9 @@ import { MisVideosComponent } from './mis-videos/mis-videos.component';
     PagoSuscripcionComponent,
     ChatComponent,
     CargandoComponent,
-    MisVideosComponent
+    MisVideosComponent,
+    PoliticaUsoComponent,
+    RenovarComponent
   ],
   imports: [
     BrowserModule,

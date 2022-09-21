@@ -1,5 +1,5 @@
-<div class="container">
-    <div class="row justify-content-center">
+<div class="container container-fluid p-2" >
+    <div class="row justify-content-center ">
         <mat-card class="card">
             <mat-card-header>
                 <mat-card-title><b>Registrar Cuenta</b></mat-card-title>
@@ -9,7 +9,7 @@
             
             <mat-divider inset></mat-divider>
             <mat-card-content>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center pt-2">
              <form 
               *ngIf = "!esExitoso"
                name="form"
@@ -18,7 +18,7 @@
                novalidate 
              >
                  <div class="row">
-                 <div class="col-sm-6">
+                 <div class="col-sm-4">
                      <div class="form-group">
                          <mat-icon>person</mat-icon>
                          <mat-form-field appearance="fill" class="textoDT" > 
@@ -44,7 +44,7 @@
                          
                      </div>
                  </div>
-                 <div class="col-sm-6">
+                 <div class="col-sm-4">
                      <div class="form-group">
                          
                          <mat-form-field appearance="fill" class="texto">
@@ -69,113 +69,118 @@
                          </mat-form-field>
                         </div>
                  </div>
+                 <div class="col-sm-4">
+                    <div class="form-group">
+                        <mat-icon>home</mat-icon>
+                        <mat-form-field appearance="fill" class="textoDT" > 
+                            <mat-label>Ingrese su dirección</mat-label>
+                            <input matInput placeholder="Dirección usuario" 
+                            type="text"
+                            class="form-control"
+                            name="direccion"
+                            [(ngModel)]="form.direccion"
+                            required
+                            minlength="3"
+                            maxlength="50"
+                            #direccion="ngModel"
+                            >
+                            <div class="alert alert-danger"
+                            role="alert"
+                            *ngIf="f.submitted && direccion.invalid"
+                            >
+                             La dirección es requerido y debe tener mas 3 caracteres.
+                            </div>
+                        </mat-form-field>
+                        
+            </div>
+                
+                </div>
                  </div>
                  
                  <div class="row">
+                   
                      <div class="col-sm-6">
-                         <div class="form-group">
-                             <mat-icon>home</mat-icon>
-                             <mat-form-field appearance="fill" class="textoDT" > 
-                                 <mat-label>Ingrese su dirección</mat-label>
-                                 <input matInput placeholder="Dirección usuario" 
-                                 type="text"
-                                 class="form-control"
-                                 name="direccion"
-                                 [(ngModel)]="form.direccion"
-                                 required
-                                 minlength="3"
-                                 maxlength="50"
-                                 #direccion="ngModel"
-                                 >
-                                 <div class="alert alert-danger"
-                                 role="alert"
-                                 *ngIf="f.submitted && direccion.invalid"
-                                 >
-                                  La dirección es requerido y debe tener mas 3 caracteres.
-                                 </div>
-                             </mat-form-field>
-                             
-                 </div>
-                     
+                        <div class="form-group">
+                            <mat-icon>calendar_today</mat-icon>
+                            <mat-form-field appearance="fill" class="texto" >
+                                <mat-label>Seleccione su fecha de nacimiento</mat-label>
+                                <input matInput [matDatepicker]="picker" 
+                                  class="form-control"
+                                  name="fechanacimiento"
+                                  [(ngModel)]="form.fechanacimiento"
+                                  required
+                                  #fechanacimiento="ngModel"
+                                  >
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker ></mat-datepicker>
+                                <div class="alert alert-danger"
+                                role="alert"
+                                *ngIf="f.submitted && fechanacimiento.invalid"
+                                >
+                                La fecha de nacimiento es requerida
+                                </div>
+                            </mat-form-field>
+                        </div>
                      </div>
                      <div class="col-sm-6">
-                         <div class="form-group">
-                         <mat-icon> phone</mat-icon>
-                         <mat-form-field appearance="fill" class="textoDT" > 
-                             <mat-label>Ingrese su telefono</mat-label>
-                             <input matInput placeholder="Telefono usuario" 
-                             type="text"
-                             class="form-control"
-                             name="telefono"
-                             [(ngModel)]="form.telefono"
-                             onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
-                             required
-                             minlength="5"
-                             maxlength="10"
-                             #telefono="ngModel"
-                             
-                             >
-                             <div class="alert alert-danger"
-                             role="alert"
-                             *ngIf="f.submitted && telefono.invalid"
-                             >
-                              El télefono es requerido
-                             </div>
-                         </mat-form-field>
+                        <div class="form-group">
+                            <mat-icon>face</mat-icon>
+                            <mat-label>  Género: </mat-label>
+                            <mat-radio-group 
+                            class="form-control"
+                            name="genero"
+                            [(ngModel)]="form.genero"
+                            required
+                            #genero="ngModel"
+                            >
+                           <mat-radio-button *ngFor="let op of generos, let i= index"  name="genero" [value]="op" class="buttonGenero" [ngClass]="{conP: i>0}">
+                            {{op}}
+                           </mat-radio-button>
+                           </mat-radio-group>
                          
+                           <div class="alert alert-danger"
+                            role="alert"
+                            *ngIf="f.submitted && genero.invalid"
+                            >
+                            El género es requerido
+                            </div>
                          </div>
-                     </div>
+                    </div>
                  </div>  
                  
-                 <div class="form-group">
-                    <mat-icon>calendar_today</mat-icon>
-                    <mat-form-field appearance="fill" class="texto" >
-                        <mat-label>Seleccione su fecha de nacimiento</mat-label>
-                        <input matInput [matDatepicker]="picker" 
-                          class="form-control"
-                          name="fechanacimiento"
-                          [(ngModel)]="form.fechanacimiento"
-                          required
-                          #fechanacimiento="ngModel"
-                          >
-                        <mat-hint>MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker ></mat-datepicker>
-                        <div class="alert alert-danger"
-                        role="alert"
-                        *ngIf="f.submitted && fechanacimiento.invalid"
-                        >
-                        La fecha de nacimiento es requerida
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                        <mat-icon> phone</mat-icon>
+                        <mat-form-field appearance="fill" class="textoDT" > 
+                            <mat-label>Ingrese su telefono</mat-label>
+                            <input matInput placeholder="Telefono usuario" 
+                            type="text"
+                            class="form-control"
+                            name="telefono"
+                            [(ngModel)]="form.telefono"
+                            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                            required
+                            minlength="5"
+                            maxlength="10"
+                            #telefono="ngModel"
+                            
+                            >
+                            <div class="alert alert-danger"
+                            role="alert"
+                            *ngIf="f.submitted && telefono.invalid"
+                            >
+                             El télefono es requerido
+                            </div>
+                        </mat-form-field>
+                        
                         </div>
-                    </mat-form-field>
-                </div>
-
-                <div class="form-group">
-                    <mat-icon>face</mat-icon>
-                    <mat-label>  Género: </mat-label>
-                    <mat-radio-group 
-                    class="form-control"
-                    name="genero"
-                    [(ngModel)]="form.genero"
-                    required
-                    #genero="ngModel"
-                    >
-                   <mat-radio-button *ngFor="let op of generos" name="genero" [value]="op" class="buttonGenero">
-                    {{op}}
-                   </mat-radio-button>
-                   </mat-radio-group>
-                 
-                   <div class="alert alert-danger"
-                    role="alert"
-                    *ngIf="f.submitted && genero.invalid"
-                    >
-                    El género es requerido
                     </div>
-                 </div>
-                
-                 <div class="form-group">
+                    <div class="col-sm-4">
+                        <div class="form-group">
                             <mat-icon> email</mat-icon>
-                            <mat-form-field appearance="fill" class="texto">
+                            <mat-form-field appearance="fill" class="textoDT">
                                 <mat-label>Ingrese su email</mat-label>
                                 <input matInput placeholder="pat@example.com"  
                                  type="email"
@@ -194,10 +199,11 @@
                                 </div>
                             </mat-form-field>
                  </div>
-
-                 <div class="form-group">
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
                             <mat-icon> vpn_key</mat-icon>
-                            <mat-form-field appearance="fill" class="texto">
+                            <mat-form-field appearance="fill" class="textoDT">
                                 <mat-label>Ingrese su clave</mat-label>
                                 <input  matInput placeholder="Clave"  
                                   type="password"
@@ -217,8 +223,26 @@
                                     </div>
                             </mat-form-field>
                  </div>
-                   
-                 
+                    </div>
+                </div>
+     
+                 <div class="row">
+                        <section class="example-section">
+                        <mat-checkbox class="example-margin"   
+                        class="form-control"
+                        name="checked"
+                        [(ngModel)]="form.checked"
+                        required
+                        #checked="ngModel"
+                        >Acepto términos y condiciones de uso.</mat-checkbox>
+                        <mat-label> <a>Ver términos y condiciones</a></mat-label>
+                        </section>
+                        
+                        <mat-error *ngIf="!form.checked">
+                          Acepte los términos y condiciones para crear una cuenta.     
+                        </mat-error>
+                        
+                 </div>
                      <button mat-raised-button style="background-color: #E7AD31;">Crear cuenta</button>
                  
               </form>

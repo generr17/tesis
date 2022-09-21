@@ -24,7 +24,7 @@ const routes: Routes = [
   {path: 'administrador', component: AdministradorComponent},
   {path: 'directivo', component: DirectivoComponent},
   {path: 'equipo', component: EquipoComponent},
-  {path: 'video/:video/:usuario', component: VideoComponent},
+  {path: 'video/:video/:usuario/:idVideo', component: VideoComponent},
   {path: 'videos', component: ListadoVideosComponent},
   {path: 'habilidades', component: HabilidadesComponent},
   { path: 'mensaje', component: ChatComponent},

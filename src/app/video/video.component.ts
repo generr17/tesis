@@ -17,6 +17,7 @@ export class VideoComponent implements OnInit {
   public url: string;
   public usr: number;
   public usuario: any={};
+  public idVideo: number;
   habilidades: string[] =[];
   cargando =  false;
   mostrar=false;
@@ -32,12 +33,13 @@ export class VideoComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioActual = this.token.obtenerUsuario();
     this.nombre = this.activateRoute.snapshot.paramMap.get("video");
-    console.log(this.nombre);
+    this.idVideo = Number(this.activateRoute.snapshot.paramMap.get("idVideo"));
+    console.log(this.idVideo);
     this.usr = Number(this.activateRoute.snapshot.paramMap.get("usuario"));
   // this.CargarDatos(this.usr);
   
    this.cargarUser();
-    console.log(this.usuario);
+    console.log(this.usr);
    
 
   }
@@ -84,6 +86,7 @@ export class VideoComponent implements OnInit {
         this.url = "http://localhost:3000/api/video/reproducir/"+ this.nombre;
         this.usuario = new Usuario(dat.nombreusuario, dat.apellidousuario, dat.telefono, dat.fechanacimiento, dat.direccion, dat.genero, dat.email,dat.suscrito);
         this.cargarHabilidades();
+        this.editarEstadoVideo();
         this.cargando= true;
              
       },
@@ -114,6 +117,17 @@ export class VideoComponent implements OnInit {
     } 
    
 
+    editarEstadoVideo(){
+      this.videoService.aditarEstadoVideo(this.idVideo, this.usuarioActual.equipoId).subscribe(
+        dat => {
+         console.log(dat);
+               
+        },
+        err => {
+          this.mensaje = err.error.message;
+          
+        })
+    }
 
    scrollTheLastElementbyClassName(){
       let elements= document.getElementsByClassName('mensaje');

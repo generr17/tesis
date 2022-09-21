@@ -4,9 +4,8 @@
       align-items: center;
       text-align: center;
       padding-bottom: 2%;
-      width: 450px;
-      background: transparent;
-    background-color: transparent;
+      width: 650px;
+      
   }
 
   .card {
@@ -34,8 +33,6 @@
   }
 
   .row {
-    padding-top: 3%;
-   padding-bottom: 3%;
    background: transparent;
    background-color: transparent;
   }
@@ -49,13 +46,15 @@
   }
 
   .buttonGenero {
-    height: 20%;
+    height: 25%;
     width: 20%;
-    margin: 20px
+    
   }
-  
+  .conP{
+    margin-left: 53px
+  }
   .opciones {
-    padding: 3%;
+    padding: 10%;
 
   }
 

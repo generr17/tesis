@@ -12,18 +12,18 @@
     <div class="col-sm-12">
       <div class="btn-group btn-group-toggle" data-toggle="buttons" >
         <label class="btn ">
-          <input type="radio" name="options" id="option2" autocomplete="off"> Todo
+          <input type="radio" name="options" id="option2" autocomplete="off" (click)="cargarVideos()"> Todo
         </label>
         <label class="btn border-warning">
-          <input type="radio" name="options" id="option2" autocomplete="off"> Nuevos
+          <input type="radio" name="options" id="option2" autocomplete="off" (click)="cargarVideosNuevos()"> Nuevos
         </label>
         <label class="btn border-warning">
-          <input type="radio" name="options" id="option2" autocomplete="off"> Vistos
+          <input type="radio" name="options" id="option2" autocomplete="off" (click)="cargarVideosVistos()"> Vistos
         </label>
         <div class="btn-group btn-group-toggle" data-toggle="buttons" *ngFor="let habilidad of habilidades">
        
         <label class="btn border-warning">
-          <input type="radio" name="options" id="option2" autocomplete="off"> {{habilidad.nombre}}
+          <input type="radio" name="options" id="option2" autocomplete="off" (click)="filtrarVideos(habilidad.nombre)" > {{habilidad.nombre}}
         </label>
       </div>
       </div>
@@ -34,7 +34,7 @@
       <div class="row" *ngIf="videos.length > 0">
         <div class="col-md-4 p-3" *ngFor="let video of videos" >
          <CDBCard clas="card" id="cd" >
-           <CDBCardImage class="img-fluid"  [src]="'http://localhost:3000/'+video.imagen" (click)="reproducirVideo(video.url, video.id)" >
+           <CDBCardImage class="img-fluid"  [src]="'http://localhost:3000/'+video.imagen" (click)="reproducirVideo(video.url, video.idUsuario, video.id)" >
            </CDBCardImage>
           
            <CDBCardBody  id="cd">

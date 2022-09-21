@@ -69,6 +69,8 @@ export class SuscripcionesComponent implements OnInit {
    
     const dialogRef = this.dialog.open(PagoSuscripcionComponent, {
       width: '300px',
+      disableClose: true,
+      hasBackdrop: true,
       data: {suscripcion: suscripcion, pago: this.pago},
     });
     dialogRef.afterClosed().subscribe(result => {
