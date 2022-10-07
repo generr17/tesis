@@ -48,8 +48,7 @@ export class LoginComponent implements OnInit {
             this.contarHabilidades();
 
            }else{
-            this.tokenStorage.cerrarsesion();
-            window.location.pathname='login';
+            window.location.pathname='bloqueado';
            }
         }
         this.openSnackBar(msg);

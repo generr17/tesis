@@ -14,12 +14,13 @@ export class AppComponent  implements OnInit{
   mostrarVentanaDirectivo = false;
   mostrarVentanaUsuario = false;
   nombreusuario : string;
-  
+  estado = 0;
   constructor(private tokenStorageService:TokenStorageService){}
   ngOnInit(): void {
     this.estaLogeado = !!this.tokenStorageService.obtenerToken();
     if (this.estaLogeado) {
       const usuario = this.tokenStorageService.obtenerUsuario();
+      this.estado = usuario.activo;
       console.log("usuario logeado: " , usuario);
       this.roles = usuario.roleId;
       if(usuario.roleId === 1){
@@ -29,7 +30,6 @@ export class AppComponent  implements OnInit{
       }else if(usuario.roleId === 3){
         this.mostrarVentanaUsuario = true;
       }
-      
       this.nombreusuario = usuario.nombreusuario;
       console.log(this.estaLogeado);
     }

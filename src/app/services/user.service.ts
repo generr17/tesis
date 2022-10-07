@@ -25,6 +25,10 @@ export class UserService {
     }, httpOptions);
   }
    
+  editarEstado(id:number): Observable<any> {
+    return this.http.put(API_URL + 'Actualizar/'+ id, httpOptions);
+  }
+
   aditarSuscripcion(id: number, estado: any): Observable<any> {
     return this.http.put(API_URL + 'editarEstadoSuscripcion/'+ id, {
       suscrito: estado

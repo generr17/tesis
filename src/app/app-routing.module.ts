@@ -13,6 +13,7 @@ import { ListadoVideosComponent } from './listado-videos/listado-videos.componen
 import { HabilidadesComponent } from './habilidades/habilidades.component';
 import { MisVideosComponent } from './mis-videos/mis-videos.component';
 import { ChatComponent } from './chat/chat.component';
+import { BloqueoComponent } from './bloqueo/bloqueo.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'habilidades', component: HabilidadesComponent},
   { path: 'mensaje', component: ChatComponent},
   {path: 'mis-videos', component: MisVideosComponent},
+  {path:'bloqueado', component: BloqueoComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 

@@ -54,6 +54,8 @@ import { CargandoComponent } from './cargando/cargando.component';
 import { MisVideosComponent } from './mis-videos/mis-videos.component';
 import { PoliticaUsoComponent } from './politica-uso/politica-uso.component';
 import { RenovarComponent } from './renovar/renovar.component';
+import { BloqueoComponent } from './bloqueo/bloqueo.component';
+import { CondicionesComponent } from './condiciones/condiciones.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,9 @@ import { RenovarComponent } from './renovar/renovar.component';
     CargandoComponent,
     MisVideosComponent,
     PoliticaUsoComponent,
-    RenovarComponent
+    RenovarComponent,
+    BloqueoComponent,
+    CondicionesComponent
   ],
   imports: [
     BrowserModule,

@@ -52,8 +52,11 @@ export class PagoSuscripcionComponent implements OnInit {
         if(order.status){
           this.data.pago= true;
            if(this.data.pago){
+            if(this.data.suscripcion.id != 0){
+             
               this.guardarSuscripcion(this.usuarioActual.id, this.data.suscripcion.id, this.data.suscripcion.nombre);
-           }
+            }
+              }
         }
       },
       onError: (err:any) => {
@@ -95,6 +98,8 @@ export class PagoSuscripcionComponent implements OnInit {
       }
     )
  }
+
+
   openSnackBar(mensaje: string) {
     
     this._snackBar.open(mensaje,"" ,{

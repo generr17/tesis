@@ -159,8 +159,9 @@ export class UsuarioComponent implements OnInit {
    
     this.uploader.onAfterAddingFile=(file: any) => {
       file.withCredentials = false;
-     console.log(file.file.size)
+     console.log(file);
     };
+      
       this.uploader.onCompleteItem = (item:any, status: any) => {
         //console.log('Detalles del video a subir:' )
        // console.log(item);
@@ -174,7 +175,7 @@ export class UsuarioComponent implements OnInit {
     
          this.vi = videoUrl;
          
-         
+        
         //this.subirImagen(this.vi);
         
 
@@ -213,8 +214,10 @@ export class UsuarioComponent implements OnInit {
         )
         }
       }
+      
   
  }
+ 
 
  abrirDialogoPago(){
   var equipos;
