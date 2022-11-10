@@ -24,10 +24,11 @@ export class BloqueoComponent implements OnInit {
   usuarioActual : any = {};
   pago = false;
   mensaje: string;
+  tokenS: any;
   constructor(private token: TokenStorageService, private usuarioService: UserService, public dialog: MatDialog, private _snackBar: MatSnackBar ) { }
  
   ngOnInit(): void {
-  
+  this.tokenS = this.token.obtenerToken();
    this.obtenerUsuarioActual();
   
 

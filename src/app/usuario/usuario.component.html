@@ -1,5 +1,6 @@
+<app-no-autorizado *ngIf="!tokenS"></app-no-autorizado>
 <app-cargando *ngIf="!load"></app-cargando>
-<div class="container" *ngIf="load">
+<div class="container" *ngIf="load && tokenS">
   <div class="row justify-content-center pt-5" >
    <div class="col-sm-6" id="equipos" >
     <div class="titulo"><b>Equipos</b></div> 
@@ -56,7 +57,7 @@
          novalidate>
           <div  class="form-group">
             
-            <input type="file" name="video" class="form-control form-control-lg" ng2FileSelect [uploader]="uploader" accept="video/mp4"
+            <input type="file" name="video" id="fileUp" class="form-control form-control-lg" ng2FileSelect [uploader]="uploader" accept="video/mp4"
             [(ngModel)]="form.video"
             #video="ngModel"
             required

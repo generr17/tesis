@@ -2,23 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import { EquipoService } from '../services/equipo.service';
 import { AuthService } from '../services/auth.service';
 import { Equipo } from '../modelos/equipo.model';
+import { TokenStorageService } from '../services/token-storage.service';
 @Component({
   selector: 'app-directivo',
   templateUrl: './directivo.component.html',
   styleUrls: ['./directivo.component.scss']
 })
 export class DirectivoComponent implements OnInit {
-
+  tokenS: any;
   form: any= {};
   equiposNombre: string[]=[];
   equipos: Equipo[]=[];
   mensaje= '';
   esExitoso=false;
   esRegistroFallido=false;
-  constructor(private equipoService:EquipoService, private authService: AuthService) { }
+  load= false;
+  constructor(private equipoService:EquipoService, private authService: AuthService,private token: TokenStorageService) { }
    
   ngOnInit(): void {
-    this.obtenerListaEquipo();
+    this.tokenS = this.token.obtenerToken();
+    if(this.tokenS){
+      this.obtenerListaEquipo();
+    }else{
+      this.load = true;
+    }
+   
   }
   obtenerListaEquipo(){
     this.equipoService.obtenerEquipos().subscribe(
@@ -28,6 +36,7 @@ export class DirectivoComponent implements OnInit {
          this.equiposNombre.push(equipo[i].nombre);
          this.equipos.push(new Equipo(Number(equipo[i].id),equipo[i].nombre,equipo[i].telefono, equipo[i].direccion, equipo[i].serie, Number(equipo[i].precio))); 
        }
+       this.load = true;
       },
       err => {
         this.mensaje = err.error.message;

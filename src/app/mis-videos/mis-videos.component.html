@@ -1,5 +1,6 @@
-
-    <div class="container pt-2 container-fluid">
+<app-no-autorizado *ngIf="!tokenS"></app-no-autorizado>
+<app-cargando *ngIf="!cargando && tokenS"></app-cargando>
+    <div class="container pt-2 container-fluid" *ngIf="cargando && tokenS">
       <div class="row justify-content-center">
         <mat-form-field  appearance="fill">
           <mat-label>Buscar</mat-label>

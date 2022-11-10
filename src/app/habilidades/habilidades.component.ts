@@ -11,7 +11,8 @@ import { identifierName } from '@angular/compiler';
   styleUrls: ['./habilidades.component.scss']
 })
 export class HabilidadesComponent implements OnInit {
-
+ tokenS: any;
+ cargando= false;
   constructor(private usuarioService: UserService, private _snackBar: MatSnackBar, fb: FormBuilder, private tokenStorageService: TokenStorageService) {
     this.form = fb.group({
       selectedHabilidades:  new FormArray([])
@@ -22,8 +23,14 @@ export class HabilidadesComponent implements OnInit {
   nombresHabilidades: string[] = [];
   mensaje: string;
   ngOnInit(): void {
-    this.openSnackBar("Aun faltan pasos para completar la configuración de su cuenta");
+    this.tokenS = this.tokenStorageService.obtenerToken();
+    if(this.tokenS){
+      this.openSnackBar("Aun faltan pasos para completar la configuración de su cuenta");
     this.obtenerListaHabilidades();
+    } else{
+      this.cargando = true;
+    }
+    
   }
 
 
@@ -38,7 +45,7 @@ export class HabilidadesComponent implements OnInit {
          this.habilidades.push(new Habilidad(Number(habilidadesA[i].id),habilidadesA[i].nombre)); 
          this.nombresHabilidades.push(habilidadesA[i].nombre);
        }
-      
+       this.cargando = true;
      
       },
       err => {

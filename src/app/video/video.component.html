@@ -1,5 +1,6 @@
+<app-no-autorizado *ngIf="!tokenS"></app-no-autorizado> 
  <app-cargando *ngIf="!cargando"></app-cargando>
-  <div class="container-fluid pb-2" *ngIf="cargando">
+  <div class="container-fluid pb-2" *ngIf="cargando && tokenS">
     <div class="row-justify-content-center"  >
   
    <div class="row" >

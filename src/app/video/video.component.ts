@@ -12,7 +12,7 @@ import { TokenStorageService } from '../services/token-storage.service';
   styleUrls: ['./video.component.scss']
 })
 export class VideoComponent implements OnInit {
-
+  tokenS: any;
   public nombre : string
   public url: string;
   public usr: number;
@@ -31,11 +31,17 @@ export class VideoComponent implements OnInit {
   constructor(private videoService: VideoService, private activateRoute: ActivatedRoute, private usuarioService: UserService, private token: TokenStorageService, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.usuarioActual = this.token.obtenerUsuario();
-    this.nombre = this.activateRoute.snapshot.paramMap.get("video");
-    this.idVideo = Number(this.activateRoute.snapshot.paramMap.get("idVideo"));
-    console.log(this.idVideo);
-    this.usr = Number(this.activateRoute.snapshot.paramMap.get("usuario"));
+    this.tokenS= this.token.obtenerToken();
+    if(this.tokenS){
+      this.usuarioActual = this.token.obtenerUsuario();
+      this.nombre = this.activateRoute.snapshot.paramMap.get("video");
+      this.idVideo = Number(this.activateRoute.snapshot.paramMap.get("idVideo"));
+      console.log(this.idVideo);
+      this.usr = Number(this.activateRoute.snapshot.paramMap.get("usuario"));
+    }else{
+      this.cargando = true;
+    }
+    
   // this.CargarDatos(this.usr);
   
    this.cargarUser();

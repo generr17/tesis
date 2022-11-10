@@ -1,0 +1,47 @@
+.example-card{
+    justify-content:center;
+    align-items:center;
+    background-color:#E2B202;
+    font-family:"Quicksand", sans-serif;
+    width: 80%;
+}
+#container_anim{
+    position:relative;
+    width:100%;
+    height:70%;
+    
+}
+
+
+
+#text{
+  
+  position:absolute;
+  font-size:50px;
+  top:25%;
+  width:100%;
+  text-align:center;
+  padding-left: 20%;
+}
+
+#credit{
+    position:absolute;
+    font-size:20px;
+    bottom: 50%;
+    width:100%;
+    text-align:center;
+    padding-left: 20%;
+}
+
+.div {
+    position:absolute;
+    font-size:20px;
+    bottom: 20%;
+    width:100%;
+    text-align:center;
+    padding-left: 20%;
+}
+
+a{
+    color: rgb(115,102,102);
+}

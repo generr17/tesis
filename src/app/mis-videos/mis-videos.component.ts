@@ -8,15 +8,22 @@ import { VideoService } from '../services/video.service';
   styleUrls: ['./mis-videos.component.scss']
 })
 export class MisVideosComponent implements OnInit {
-
+  tokenS: any;
+  cargando = false;
   constructor(private videoService: VideoService,private tokenStorageService: TokenStorageService) { }
   videos : any[]= [];
   usuarioActual: any = {};
    value: any;
    mensaje: string;
   ngOnInit(): void {
-    this.usuarioActual = this.tokenStorageService.obtenerUsuario();
+    this.tokenS = this.tokenStorageService.obtenerToken();
+    if(this.tokenS){
+      this.usuarioActual = this.tokenStorageService.obtenerUsuario();
     this.cargarVideos();
+    }else{
+      this.cargando = true;
+    }
+    
   }
 
   reproducirVideo(videoUrl: string) {
@@ -34,7 +41,7 @@ export class MisVideosComponent implements OnInit {
         let dt= new Date();
           this.videos.push({ id: videoDat[index].id, url: videoDat[index].url, imagen: videoDat[index].imagen, fecha: date, titulo: videoDat[index].titulo, descripcion:  videoDat[index].descripcion});
       }
-      
+       this.cargando = true;
       },
       err => {
         this.mensaje = err.error.message;

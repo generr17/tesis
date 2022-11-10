@@ -1,4 +1,6 @@
-<div class="container">
+<app-no-autorizado *ngIf="!tokenS"></app-no-autorizado>
+<app-cargando *ngIf="!cargando"></app-cargando>
+<div class="container" *ngIf="cargando && tokenS">
   <div class="row pt-2" >
     <div class="card mb-3  rw" style="max-width: 7000px;">
       <div class="row no-gutters " >

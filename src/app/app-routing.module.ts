@@ -14,6 +14,7 @@ import { HabilidadesComponent } from './habilidades/habilidades.component';
 import { MisVideosComponent } from './mis-videos/mis-videos.component';
 import { ChatComponent } from './chat/chat.component';
 import { BloqueoComponent } from './bloqueo/bloqueo.component';
+import { PoliticaUsoComponent } from './politica-uso/politica-uso.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,6 @@ const routes: Routes = [
   {path: 'registro', component: RegistroComponent},
   {path: 'usuario', component: UsuarioComponent}, 
   {path: 'menu', component:MenuComponent},
-  {path: 'perfil', component: PerfilComponent},
   {path: 'administrador', component: AdministradorComponent},
   {path: 'directivo', component: DirectivoComponent},
   {path: 'equipo', component: EquipoComponent},
@@ -31,6 +31,7 @@ const routes: Routes = [
   { path: 'mensaje', component: ChatComponent},
   {path: 'mis-videos', component: MisVideosComponent},
   {path:'bloqueado', component: BloqueoComponent},
+  {path:'terminos-condiciones', component: PoliticaUsoComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 

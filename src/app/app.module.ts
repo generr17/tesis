@@ -56,6 +56,7 @@ import { PoliticaUsoComponent } from './politica-uso/politica-uso.component';
 import { RenovarComponent } from './renovar/renovar.component';
 import { BloqueoComponent } from './bloqueo/bloqueo.component';
 import { CondicionesComponent } from './condiciones/condiciones.component';
+import { NoAutorizadoComponent } from './no-autorizado/no-autorizado.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { CondicionesComponent } from './condiciones/condiciones.component';
     PoliticaUsoComponent,
     RenovarComponent,
     BloqueoComponent,
-    CondicionesComponent
+    CondicionesComponent,
+    NoAutorizadoComponent
   ],
   imports: [
     BrowserModule,

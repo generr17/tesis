@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EquipoService } from '../services/equipo.service';
 import { Serie } from '../modelos/serie.model';
+import { TokenStorageService } from '../services/token-storage.service';
 @Component({
   selector: 'app-equipo',
   templateUrl: './equipo.component.html',
@@ -9,14 +10,22 @@ import { Serie } from '../modelos/serie.model';
 
 export class EquipoComponent implements OnInit {
   form: any= {};
+  tokenS: any;
+  load=false;
   clases: string[]=[];
   esExitoso = false;
   esRegistroFalliso = false;
   mensaje: '';
   series: Serie[] = [];
-  constructor(private equipoService: EquipoService) { }
+  constructor(private equipoService: EquipoService, private token:TokenStorageService) { }
   ngOnInit(): void {
-   this.obtenerListaSeries();
+    this.tokenS = this.token.obtenerToken();
+    if(this.tokenS){
+      this.obtenerListaSeries();
+    }else{
+      this.load =true;
+    }
+  
   }
 
   guardarEquipo(): void {
@@ -43,6 +52,7 @@ export class EquipoComponent implements OnInit {
           this.clases.push(seriesA[i].nombre);
           this.series.push(new Serie(Number(seriesA[i].id),seriesA[i].nombre )); 
         }
+        this.load = true;
        },
        err => {
          this.mensaje = err.error.message;

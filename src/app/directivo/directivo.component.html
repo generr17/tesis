@@ -1,4 +1,6 @@
-<div class="container" >
+<app-no-autorizado *ngIf="!tokenS"></app-no-autorizado>>
+<app-cargando *ngIf="!load"></app-cargando>
+<div class="container" *ngIf="load && tokenS">
     <div class="row justify-content-center">
         <mat-card class="example-card ">
             <mat-card-header>

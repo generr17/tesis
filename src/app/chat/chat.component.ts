@@ -7,7 +7,8 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-
+ tokenS: any;
+ cargando = false;
   constructor(private token: TokenStorageService, private userService: UserService) { }
   nuevoMensaje :string ="";
   usuarioActual: any= {};
@@ -17,8 +18,14 @@ export class ChatComponent implements OnInit {
   mensajes: any[] = [];
   nombreUsuario: string="";
   ngOnInit(): void {
-    this.usuarioActual= this.token.obtenerUsuario();
+    this.tokenS = this.token.obtenerToken();
+    if(this.tokenS){
+      this.usuarioActual= this.token.obtenerUsuario();
     this.obtenerChatsRooms();
+    }else{
+      this.cargando= true;
+    }
+    
   }
 
   obtenerChatsRooms() {
@@ -36,7 +43,7 @@ export class ChatComponent implements OnInit {
         }
         this.chatsRooms.push({id: chats[index].id, usuario: usuario, emisor: chats[index].emisor, texto: chats[index].mensaje, estado:chats[index].estado});  
        }
-
+          this.cargando = true;
        },
        err => {
          this.mensaje = err.error.message;

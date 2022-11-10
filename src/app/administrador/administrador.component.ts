@@ -11,11 +11,12 @@ import { EquipoService } from '../services/equipo.service';
 export class AdministradorComponent implements OnInit {
   
   rol:string = '';
+  tokenS: any;
   constructor( private authService: AuthService, private tokenStorage: TokenStorageService, private equipoService:EquipoService) { }
   
   ngOnInit(): void {
-    this.rol = this.tokenStorage.obtenerUsuario().rolusuario;
-    console.log("Rol de usuario: " + this.rol);
+    this.tokenS = this.tokenStorage.obtenerToken();
+  
 
   }
 }

@@ -18,7 +18,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class UsuarioComponent implements OnInit {
  
-
+   tokenS: any;
   equipos: Equipo[]=[];
   series: Serie[] = [];
   Series : Serie[] = [];
@@ -33,6 +33,7 @@ export class UsuarioComponent implements OnInit {
   requiredFileType:string;
   load = false;
   vi='';
+ 
   cargando= false;
    pago=false;  
    transactions: Transaction[]=[];
@@ -56,11 +57,16 @@ export class UsuarioComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    
-    this.obtenerListaSeries();
+    this.tokenS = this.tokenStorageService.obtenerToken();
+    if(this.tokenS){
+      this.obtenerListaSeries();
     this.obtenerListaEquipo();
     this.cargarHabilidades();
     this.subirVideo();
+    }else{
+      this.load = true;
+    }
+    
   
   }
 
@@ -159,9 +165,14 @@ export class UsuarioComponent implements OnInit {
    
     this.uploader.onAfterAddingFile=(file: any) => {
       file.withCredentials = false;
-     console.log(file);
+     console.log(file.file.name);
+     var vid = file;
+    alert(vid.file);
     };
-      
+
+    
+   
+     /*
       this.uploader.onCompleteItem = (item:any, status: any) => {
         //console.log('Detalles del video a subir:' )
        // console.log(item);
@@ -214,10 +225,10 @@ export class UsuarioComponent implements OnInit {
         )
         }
       }
-      
+      */
   
  }
- 
+
 
  abrirDialogoPago(){
   var equipos;
@@ -255,6 +266,7 @@ export class UsuarioComponent implements OnInit {
    });
 
 }
+
 
 
 }

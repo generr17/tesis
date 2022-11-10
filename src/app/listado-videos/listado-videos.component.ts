@@ -13,7 +13,8 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./listado-videos.component.scss']
 })
 export class ListadoVideosComponent implements OnInit {
-
+ cargando= false;
+ tokenS : any;
   constructor(private videoService: VideoService,private tokenStorageService: TokenStorageService, public dialog: MatDialog, private usuarioService: UserService, private router: Router) { }
   videos : Video[]=[];
   usuarioActual: any;
@@ -24,10 +25,16 @@ export class ListadoVideosComponent implements OnInit {
   visto: number;
   habilidades: any[]=[];
   ngOnInit(): void {
-    this.usuarioActual= this.tokenStorageService.obtenerUsuario();
-    console.log(this.usuarioActual);
-    this.cargarVideos();
-    this.obtenerListaHabilidades();
+    this.tokenS = this.tokenStorageService.obtenerToken();
+    if(this.tokenS){
+      this.usuarioActual= this.tokenStorageService.obtenerUsuario();
+      console.log(this.usuarioActual);
+      this.cargarVideos();
+      this.obtenerListaHabilidades();
+    }else{
+      this.cargando= true;
+    }
+   
    
   }
 
@@ -204,7 +211,7 @@ export class ListadoVideosComponent implements OnInit {
 
          this.habilidades.push({id: habilidadesA[i].id, nombre: habilidadesA[i].nombre}); 
        }
-      
+       this.cargando = true;
      
       },
       err => {
