@@ -165,31 +165,19 @@ export class UsuarioComponent implements OnInit {
    
     this.uploader.onAfterAddingFile=(file: any) => {
       file.withCredentials = false;
-     console.log(file.file.name);
-     var vid = file;
-    alert(vid.file);
+    
     };
 
-    
-   
-     /*
       this.uploader.onCompleteItem = (item:any, status: any) => {
-        //console.log('Detalles del video a subir:' )
-       // console.log(item);
         let resp=JSON.parse(item._xhr.responseText);
-
+        this.openSnackBar(resp.message);
         const videoUrl = resp.message;
         const result=resp.success;
         const image= resp.imagenUrl;
-        console.log(videoUrl); 
+        
         if(result){
     
          this.vi = videoUrl;
-         
-        
-        //this.subirImagen(this.vi);
-        
-
         if (this.form.equipoId.length>0) {
           //var equip= this.form.equipoId;
           for(let i=0; i < this.form.equipoId.length; i++){
@@ -206,15 +194,13 @@ export class UsuarioComponent implements OnInit {
         
            }
          }
-         console.log(this.form.descripcion);
         this.videoService.guardarVideo(videoUrl,image, this.tokenStorageService.obtenerUsuario().id,this.seleccionados, this.form.titulo, this.form.descripcion).subscribe(
         
           data => {
-            console.log(data);
             this.esExitoso = true;
             this.esRegistroFallido = false;
-            this.openSnackBar("Video subido exitosamente");
-            //this.form.reset();
+            this.openSnackBar(data.message);
+            
             this.pago = false;
           },
           err => {
@@ -223,17 +209,17 @@ export class UsuarioComponent implements OnInit {
             this.openSnackBar(this.mensaje);
           }
         )
+        }else{
+          this.pago= true;
         }
       }
-      */
+      
   
  }
 
 
  abrirDialogoPago(){
   var equipos;
-  console.log(this.form.titulo, this.form.descripcion);
-  console.log(this.equiposSB);
   if (this.form.equipoId.length == 0) {
     //var equip= this.form.equipoId;
     equipos= this.equiposSB;
@@ -242,7 +228,7 @@ export class UsuarioComponent implements OnInit {
    }else{
     equipos= this.form.equipoId;
    }
-   console.log(equipos)
+   
   const dialogRef = this.dialog.open(MetodoDePagoComponent, {
     width: '300px',
     disableClose: true,
@@ -250,7 +236,7 @@ export class UsuarioComponent implements OnInit {
     data: {equipos: equipos, pago: this.pago, tipo: this.tipo},
   });
   dialogRef.afterClosed().subscribe(result => {
-    console.log('Dialogo cerrado');
+    
     this.pago = result;
   });
  }

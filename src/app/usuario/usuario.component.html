@@ -151,7 +151,7 @@
           <button mat-raised-button color="primary"  *ngIf="!pago" type="button" (click)="abrirDialogoPago()" [disabled]="!uploader.getNotUploadedItems().length || !form.equipoId || !form.titulo || !form.descripcion">
             Subir
           </button>
-          <button mat-raised-button color="accent" *ngIf="pago"  type="button" (click)="uploader.uploadAll()"  [disabled]="!uploader.getNotUploadedItems().length || !pago">
+          <button mat-raised-button color="accent" *ngIf="pago"  type="button" (click)="uploader.uploadAll()"  [disabled]="!uploader.getNotUploadedItems().length && !pago">
             Subir
           </button>
           
