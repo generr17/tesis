@@ -1,0 +1,46 @@
+.text{
+    text-align: justify;
+    align-content: center;
+    width: 600px;
+    font-size: larger;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+
+.header {
+    width: 100%;
+    background: #EFE80B;
+    background: linear-gradient(0deg, rgba(195,182,34,0.9023984593837535) 0%, rgba(253,187,45,0.6755077030812324) 100%);   height: 45px;
+}
+
+.derecha {
+    float: right;
+   
+}
+
+
+.izquierda {
+    float: left;
+}
+
+.btnMenu {
+    width: 100px;
+  
+    
+}
+
+.icono {
+    font-size: 45px;
+    color: #8B4700;
+}
+
+.container {
+    padding-top: 2%;
+}
+
+.logo {
+    font-size: 10px;
+    width: 45px;
+    color: #E77803;
+}
