@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { PoliticaUsoComponent } from '../politica-uso/politica-uso.component';
 
 @Component({
   selector: 'app-registro',
@@ -16,12 +18,12 @@ export class RegistroComponent implements OnInit {
   mensaje = '';
   generos = ['Femenimo', 'Masculino', 'Otro'];
   checked = false;
-  constructor(private router: Router, private authServicio: AuthService, private _snackBar: MatSnackBar) { }
+  constructor(public dialog: MatDialog,private router: Router, private authServicio: AuthService, private _snackBar: MatSnackBar) { }
  valorSeleccionado:string = '';
 
   ngOnInit(): void {
   }
-
+  
   registrar():void {
     console.log(this.form.genero);
     console.log();
@@ -30,7 +32,8 @@ export class RegistroComponent implements OnInit {
         console.log(data);
         this.esExitoso = true;
         this.esRegistroFallido = false;
-        this.openSnackBar("Usuario registrado exitosamente");
+        this.openSnackBar(data.message);
+        this.router.navigate(['login']);
       },
       err => {
         this.mensaje = err.error.message;
@@ -38,7 +41,7 @@ export class RegistroComponent implements OnInit {
         this.openSnackBar(this.mensaje + ". Intente mas tarde");
       }
     );
-    //this.router.navigate(['login']);
+    //
   }
   irAIniciarSesion():void{
     this.router.navigate(['login']);
@@ -54,4 +57,15 @@ export class RegistroComponent implements OnInit {
      });
   
   }
+
+  abrirDialogo(){
+ 
+    const dialogRef = this.dialog.open(PoliticaUsoComponent, {
+      width: '550px',
+      
+    });
+  }
+
+
+
 }

@@ -234,18 +234,18 @@
                         [(ngModel)]="form.checked"
                         required
                         #checked="ngModel"
-                        >Acepto términos y condiciones de uso.</mat-checkbox>
-                        <mat-label> <a href="/terminos-condiciones">Ver términos y condiciones</a></mat-label>
+                        >Aceptar términos y condiciones de uso.</mat-checkbox>
                         </section>
                         
                         <mat-error *ngIf="!form.checked">
-                          Acepte los términos y condiciones para crear una cuenta.     
+                          Debe aceptar los términos y condiciones para crear una cuenta.     
                         </mat-error>
                         
                  </div>
-                     <button mat-raised-button style="background-color: #E7AD31;">Crear cuenta</button>
+                     <button mat-raised-button style="background-color: #E7AD31;" type="submit">Crear cuenta</button>
                  
               </form>
+              <button mat-button color="primary" (click)="abrirDialogo()">Ver términos y condiciones</button>
              
             </div>
               </mat-card-content>

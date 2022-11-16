@@ -3,6 +3,7 @@ import { TokenStorageService } from '../services/token-storage.service';
 import {MatDialog} from '@angular/material/dialog';
 import { PerfilComponent } from '../perfil/perfil.component';
 import { UserService } from '../services/user.service';
+import { PoliticaUsoComponent } from '../politica-uso/politica-uso.component';
 
 @Component({
   selector: 'app-menu',
@@ -32,7 +33,9 @@ export class MenuComponent implements OnInit {
   }
    
   abrirInformacionUsuario(){
-    const dialogRef = this.dialog.open(PerfilComponent);
+    const dialogRef = this.dialog.open(PerfilComponent, {
+      width: '650px',
+    });
     
   }
   contarMensajeNuevos() {
@@ -53,5 +56,12 @@ export class MenuComponent implements OnInit {
         
       });
    }
+  }
+  abrirDialogo(){
+ 
+    const dialogRef = this.dialog.open(PoliticaUsoComponent, {
+      width: '550px',
+      
+    });
   }
 }
