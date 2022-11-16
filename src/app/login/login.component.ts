@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         this.loginFallido = false;
         this.estaLogeado = true;
         this.rol = this.tokenStorage.obtenerUsuario().rolusuario;
-        let msg="Logeado como: " + this.rol;
+        let msg="Logeado exitosamente " ;
         if(this.rol == "usuario"){
            if(this.tokenStorage.obtenerUsuario().activo){
             this.openSnackBar(msg);
