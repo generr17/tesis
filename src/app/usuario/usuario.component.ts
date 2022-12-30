@@ -211,6 +211,7 @@ export class UsuarioComponent implements OnInit {
         )
         }else{
           this.pago= true;
+          this.uploader.destroy();
         }
       }
       

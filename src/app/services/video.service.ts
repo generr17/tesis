@@ -6,7 +6,7 @@ import { getMatIconFailedToSanitizeUrlError } from '@angular/material/icon';
 import { MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 
 
- const API_URL = 'http://localhost:3000/api/video/';
+ const API_URL = 'https://node-js-servidor-production.up.railway.app/api/video/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
 };
@@ -14,8 +14,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class VideoService {
- public URL = 'http://localhost:3000/api/video/subir';
- public URLS = 'http://localhost:3000/api/video/subirImagen';
+ public URL = 'https://node-js-servidor-production.up.railway.app/api/video/subir';
+ public URLS = 'https://node-js-servidor-production.up.railway.app/api/video/subirImagen';
   constructor(private http: HttpClient) { }
   guardarVideo(video: any, imagen: any, usuario:any, equipos:any, titulo: string, descripcion: string): Observable<any> {
 
@@ -79,7 +79,7 @@ obtenerVideosNoVistos(equipoId: number): Observable<any> {
  }
  //
  obtenerSuscripciones(): Observable<any> {
-  return this.http.get('http://localhost:3000/obtenerSuscripciones', { responseType: 'text' });
+  return this.http.get('https://node-js-servidor-production.up.railway.app/obtenerSuscripciones', { responseType: 'text' });
  }
  reproducirVideo(video:any): Observable<any> {
    return this.http.get(API_URL + "reproducir", video);

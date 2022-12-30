@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const API_URL = 'http://localhost:3000/api/equipo/';
+const API_URL = 'https://node-js-servidor-production.up.railway.app/api/equipo/';
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
 };
@@ -24,7 +25,7 @@ export class EquipoService {
   };
 
   obtenerSeries(): Observable<any> {
-  const listado= this.http.get('http://localhost:3000/api/serie/listar', {responseType: 'text'});
+  const listado= this.http.get('https://node-js-servidor-production.up.railway.app/api/serie/listar', {responseType: 'text'});
   return listado
   }
 

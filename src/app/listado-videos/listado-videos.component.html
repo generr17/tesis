@@ -35,7 +35,7 @@
       <div class="row" *ngIf="videos.length > 0">
         <div class="col-md-4 p-3" *ngFor="let video of videos" >
          <CDBCard clas="card" id="cd" >
-           <CDBCardImage class="img-fluid"  [src]="'http://localhost:3000/'+video.imagen" (click)="reproducirVideo(video.url, video.idUsuario, video.id)" >
+           <CDBCardImage class="img-fluid"  [src]="'https://node-js-servidor-production.up.railway.app/'+video.imagen" (click)="reproducirVideo(video.url, video.idUsuario, video.id)" >
            </CDBCardImage>
           
            <CDBCardBody  id="cd">

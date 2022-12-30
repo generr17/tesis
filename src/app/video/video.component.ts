@@ -89,7 +89,7 @@ export class VideoComponent implements OnInit {
   cargarUser(){
     this.usuarioService.obtenerUPorId(this.usr).subscribe(
       dat => {
-        this.url = "http://localhost:3000/api/video/reproducir/"+ this.nombre;
+        this.url = "https://node-js-servidor-production.up.railway.app/api/video/reproducir/"+ this.nombre;
         this.usuario = new Usuario(dat.nombreusuario, dat.apellidousuario, dat.telefono, dat.fechanacimiento, dat.direccion, dat.genero, dat.email,dat.suscrito);
         this.cargarHabilidades();
         this.editarEstadoVideo();

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const API_URL = 'http://localhost:3000/api/test/';
+const API_URL = 'https://node-js-servidor-production.up.railway.app/api/test/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
 };
@@ -58,7 +58,7 @@ export class UserService {
   }
 
   contarMensajesNuevos(id:number): Observable<any>{
-    return this.http.get('http://localhost:3000/api/contarNuevosMensajes/' + id, {responseType: 'text'});
+    return this.http.get('https://node-js-servidor-production.up.railway.app/api/contarNuevosMensajes/' + id, {responseType: 'text'});
   }
   guardarHabilidades(usuario:any, habilidades:any): Observable<any> {
 
@@ -108,14 +108,14 @@ export class UserService {
  
 
   enviarMensaje(emisorId: number, receptorId: number, texto: string): Observable<any> {
-    return this.http.post('http://localhost:3000/api/enviarMensaje', {
+    return this.http.post('https://node-js-servidor-production.up.railway.app/api/enviarMensaje', {
       usuarioEmisor:emisorId,
       usuarioReceptor: receptorId,
       mensaje: texto
     }, httpOptions);
   };
   enviar(emisorId: number, chatRoomId:number, texto: string){
-     return this.http.post('http://localhost:3000/api/enviar', {
+     return this.http.post('https://node-js-servidor-production.up.railway.app/api/enviar', {
       usuarioEmisor: emisorId,
       id: chatRoomId,
       mensaje: texto,
@@ -123,15 +123,15 @@ export class UserService {
   }
 
   obtenerChatRooms(id: number): Observable<any> {
-    return this.http.get('http://localhost:3000/api/obtenerChatRooms/' + id, {responseType: 'text'});
+    return this.http.get('https://node-js-servidor-production.up.railway.app/api/obtenerChatRooms/' + id, {responseType: 'text'});
   };
 
   obtenerMensajes(id: number): Observable<any> {
-    return this.http.get('http://localhost:3000/api/obtenerMensajes/' + id, {responseType: 'text'});
+    return this.http.get('https://node-js-servidor-production.up.railway.app/api/obtenerMensajes/' + id, {responseType: 'text'});
   }
 
   aditarEstadoMensaje(emisorId: number, chatRoomId: number): Observable<any> {
-    return this.http.put('http://localhost:3000/api/actualizarMensajes', {
+    return this.http.put('https://node-js-servidor-production.up.railway.app/api/actualizarMensajes', {
        usuarioEmisor: emisorId,
        id: chatRoomId 
     }, httpOptions);
